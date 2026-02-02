@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
+<script src="https://multiplex.up.railway.app/socket.io/socket.io.js"></script>
+<script src="https://multiplex.up.railway.app/client.js"></script>
 <script src="reg-cat-part1_files/libs/clipboard/clipboard.min.js"></script>
 <script src="reg-cat-part1_files/libs/quarto-html/tabby.min.js"></script>
 <script src="reg-cat-part1_files/libs/quarto-html/popper.min.js"></script>
@@ -3636,6 +3638,11 @@ Marketing       0           0         1</code></pre>
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
+multiplex: {
+  secret: null,
+  id: '350487c243bd086167828e2f3e09a7baa9fe1073c803d07501db9dcd3c7e3bab',
+  url: 'https://multiplex.up.railway.app/'
+},
 'controlsAuto': true,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
