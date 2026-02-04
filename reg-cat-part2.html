@@ -228,62 +228,6 @@
 <h2></h2>
 <p><strong>But wait…</strong> Should we trust this result? What questions should we ask before making this decision?</p>
 </section>
-<section id="review-key-concepts-from-part-1" class="slide level2 content-light">
-<h2>Review: Key Concepts from Part 1</h2>
-<p><strong>What does ŷ mean?</strong></p>
-<ul>
-<li>ŷ is our estimate of the <strong>mean y</strong> for all people with those predictor values</li>
-<li>With categorical predictors: ŷ for each group equals that <strong>group’s mean</strong></li>
-<li>The regression line connects conditional means</li>
-</ul>
-<p><strong>Why do categorical predictors need special coding?</strong></p>
-<ul>
-<li>Categories have no inherent numeric order (1, 2, 3 would imply equal spacing)</li>
-<li>Solution: <strong>Treatment (dummy) coding</strong> uses 0s and 1s</li>
-<li>Reference group: coded as 0 on all contrast columns</li>
-<li>Other groups: coded as 1 on their respective contrast column</li>
-</ul>
-</section>
-<section id="review-interpreting-treatment-coded-output" class="slide level2">
-<h2>Review: Interpreting Treatment-Coded Output</h2>
-<p><strong>With treatment coding, the coefficients tell us:</strong></p>
-<table class="caption-top">
-<colgroup>
-<col style="width: 44%">
-<col style="width: 55%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Coefficient</th>
-<th>Interpretation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Intercept (b₀)</td>
-<td>Mean of the <strong>reference group</strong></td>
-</tr>
-<tr class="even">
-<td>Each slope (b₁, b₂, …)</td>
-<td>Difference between that group and the reference</td>
-</tr>
-</tbody>
-</table>
-<p><strong>“Thinking horizontally” to get predictions:</strong></p>
-<p><span class="math display">\[\hat{y} = b_0 \times 1 + b_1 \times c_1 + b_2 \times c_2 + ...\]</span></p>
-<ul>
-<li>Plug in 0s and 1s based on group membership</li>
-<li>Reference group: ŷ = b₀ (all contrast columns = 0)</li>
-<li>Other groups: ŷ = b₀ + bₖ (their contrast column = 1)</li>
-</ul>
-<p><strong>Today we will focus on b-weights not beta-weights because we are using contrast columns</strong></p>
-</section>
-<section id="quick-check-before-we-move-on" class="slide level2 content-light">
-<h2>Quick Check: Before We Move On</h2>
-<p>💬 <strong>In the chat:</strong> What’s one concept from Part 1 that you want to make sure you solidify today?</p>
-<p>Examples: “How to interpret the intercept,” “Why we use 0s and 1s,” “What ŷ actually represents”</p>
-<p><em>Take 30 seconds—this helps me know where to slow down.</em></p>
-</section>
 <section id="part-4-combining-categorical-and-continuous-predictors" class="slide level2 section-header" data-background="linear-gradient(135deg, #880041 0%, #A31753 50%, #B53A66 100%)">
 <h2>Part 4: Combining Categorical and Continuous Predictors</h2>
 </section>
@@ -1048,6 +992,80 @@
 <p><strong>Notably, the adjusted program effect (5.33) is substantially smaller than the unadjusted effect (13.72) we observed earlier—much of the apparent program benefit was actually due to education differences between groups.</strong></p>
 </div>
 </section>
+<section id="comparing-unadjusted-and-adjusted-models" class="slide level2">
+<h2>Comparing Unadjusted and Adjusted Models</h2>
+<p><strong>Unadjusted</strong> (program only)</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">66.56</td>
+<td style="text-align: right;">2.186956</td>
+<td style="text-align: right;">30.434993</td>
+<td style="text-align: right;">0.000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">programnew</td>
+<td style="text-align: right;">13.72</td>
+<td style="text-align: right;">3.092823</td>
+<td style="text-align: right;">4.436076</td>
+<td style="text-align: right;">0.000319</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>Adjusted</strong> (program + education)</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">15.541810</td>
+<td style="text-align: right;">9.014763</td>
+<td style="text-align: right;">1.724040</td>
+<td style="text-align: right;">0.1028359</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">programnew</td>
+<td style="text-align: right;">5.333448</td>
+<td style="text-align: right;">2.368914</td>
+<td style="text-align: right;">2.251432</td>
+<td style="text-align: right;">0.0378754</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education</td>
+<td style="text-align: right;">3.494397</td>
+<td style="text-align: right;">0.610837</td>
+<td style="text-align: right;">5.720669</td>
+<td style="text-align: right;">0.0000250</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
 <section id="augment-the-adjusted-onboarding-model" class="slide level2">
 <h2>Augment the Adjusted Onboarding Model</h2>
 <p>Make predicted scores for each person</p>
@@ -1386,8 +1404,8 @@
 <h2>Plot Adjusted Onboarding Model (3D)</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-0ef198da97a8dd84ef27" style="width:768px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-0ef198da97a8dd84ef27">{"x":{"visdat":{"2eeb48425882":["function () ","plotlyVisDat"],"2eeb7bc0e3dd":["function () ","data"],"2eeb34b001a4":["function () ","data"],"2eebf3bd102":["function () ","data"],"2eeb2016e21e":["function () ","data"]},"cur_data":"2eeb2016e21e","attrs":{"2eeb7bc0e3dd":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","marker":{"size":6,"color":"#F8766D"},"name":"old","inherit":true},"2eeb34b001a4":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"lines","line":{"width":4,"color":"#F8766D"},"showlegend":false,"inherit":true},"2eebf3bd102":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","marker":{"size":6,"color":"#00BFC4","symbol":"diamond"},"name":"new","inherit":true},"2eeb2016e21e":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"lines","line":{"width":4,"color":"#00BFC4"},"showlegend":false,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"Education"},"yaxis":{"title":"Program","tickvals":[0,1],"ticktext":["old","new"]},"zaxis":{"title":"Performance"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[12,13,14,14,14,15,15,16,16,17],"y":[0,0,0,0,0,0,0,0,0,0],"z":[54.600000000000001,65.700000000000003,67.5,63.700000000000003,66,64.599999999999994,69.799999999999997,64.400000000000006,74,75.299999999999997],"type":"scatter3d","mode":"markers","marker":{"color":"#F8766D","size":6,"line":{"color":"rgba(31,119,180,1)"}},"name":"old","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null},{"x":[12,13,14,14,14,15,15,16,16,17],"y":[0,0,0,0,0,0,0,0,0,0],"z":[57.47456896551725,60.968965517241386,64.463362068965523,64.463362068965523,64.463362068965523,67.95775862068966,67.95775862068966,71.452155172413796,71.452155172413796,74.946551724137933],"type":"scatter3d","mode":"lines","line":{"color":"#F8766D","width":4},"showlegend":false,"marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[15,15,16,16,16,17,18,18,19,20],"y":[1,1,1,1,1,1,1,1,1,1],"z":[67.799999999999997,73,78,81.799999999999997,80.200000000000003,70.700000000000003,84.200000000000003,88.099999999999994,88.400000000000006,90.599999999999994],"type":"scatter3d","mode":"markers","marker":{"color":"#00BFC4","size":6,"symbol":"diamond","line":{"color":"rgba(44,160,44,1)"}},"name":"new","error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"line":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[15,15,16,16,16,17,18,18,19,20],"y":[1,1,1,1,1,1,1,1,1,1],"z":[73.291206896551728,73.291206896551728,76.785603448275864,76.785603448275864,76.785603448275864,80.280000000000001,83.774396551724138,83.774396551724138,87.268793103448274,90.763189655172411],"type":"scatter3d","mode":"lines","line":{"color":"#00BFC4","width":4},"showlegend":false,"marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-84fee03be21d40f82a41" style="width:768px;height:576px;"></div>
+<script type="application/json" data-for="htmlwidget-84fee03be21d40f82a41">{"x":{"visdat":{"12f9641377a5d":["function () ","plotlyVisDat"],"12f962142911e":["function () ","data"],"12f96194559a1":["function () ","data"],"12f9617ff65fd":["function () ","data"],"12f9680d15a":["function () ","data"]},"cur_data":"12f9680d15a","attrs":{"12f962142911e":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","marker":{"size":6,"color":"#F8766D"},"name":"old","inherit":true},"12f96194559a1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"lines","line":{"width":4,"color":"#F8766D"},"showlegend":false,"inherit":true},"12f9617ff65fd":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","marker":{"size":6,"color":"#00BFC4","symbol":"diamond"},"name":"new","inherit":true},"12f9680d15a":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"lines","line":{"width":4,"color":"#00BFC4"},"showlegend":false,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"Education"},"yaxis":{"title":"Program","tickvals":[0,1],"ticktext":["old","new"]},"zaxis":{"title":"Performance"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[12,13,14,14,14,15,15,16,16,17],"y":[0,0,0,0,0,0,0,0,0,0],"z":[54.600000000000001,65.700000000000003,67.5,63.700000000000003,66,64.599999999999994,69.799999999999997,64.400000000000006,74,75.299999999999997],"type":"scatter3d","mode":"markers","marker":{"color":"#F8766D","size":6,"line":{"color":"rgba(31,119,180,1)"}},"name":"old","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null},{"x":[12,13,14,14,14,15,15,16,16,17],"y":[0,0,0,0,0,0,0,0,0,0],"z":[57.47456896551725,60.968965517241386,64.463362068965523,64.463362068965523,64.463362068965523,67.95775862068966,67.95775862068966,71.452155172413796,71.452155172413796,74.946551724137933],"type":"scatter3d","mode":"lines","line":{"color":"#F8766D","width":4},"showlegend":false,"marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[15,15,16,16,16,17,18,18,19,20],"y":[1,1,1,1,1,1,1,1,1,1],"z":[67.799999999999997,73,78,81.799999999999997,80.200000000000003,70.700000000000003,84.200000000000003,88.099999999999994,88.400000000000006,90.599999999999994],"type":"scatter3d","mode":"markers","marker":{"color":"#00BFC4","size":6,"symbol":"diamond","line":{"color":"rgba(44,160,44,1)"}},"name":"new","error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"line":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[15,15,16,16,16,17,18,18,19,20],"y":[1,1,1,1,1,1,1,1,1,1],"z":[73.291206896551728,73.291206896551728,76.785603448275864,76.785603448275864,76.785603448275864,80.280000000000001,83.774396551724138,83.774396551724138,87.268793103448274,90.763189655172411],"type":"scatter3d","mode":"lines","line":{"color":"#00BFC4","width":4},"showlegend":false,"marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>The two parallel lines from the 2D plot are now shown in 3D space, where the y-axis represents the categorical program variable.</p>
@@ -1474,10 +1492,6 @@
 </tbody>
 </table>
 <p>The difference (13.72 − 5.33 = 8.39 points) was due to education, not the program.</p>
-<div class="fragment">
-<p><strong>👥 Turn to a neighbor (or type in chat):</strong> In your own words, WHY did the coefficient get smaller?</p>
-<p><em>You have 60 seconds. Use plain language—no jargon!</em></p>
-</div>
 </section>
 <section id="where-did-the-8.39-points-go" class="slide level2 content-light" data-transition="none">
 <h2>Where Did the 8.39 Points Go?</h2>
@@ -1656,14 +1670,10 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td>“Men earn more than women”</td>
-<td>“Men earn more than women <em>in the same job</em>”</td>
-</tr>
-<tr class="even">
 <td>“Private schools have better test scores”</td>
 <td>“Private schools have better scores <em>among students with similar family income</em>”</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>“Drug A works better than Drug B”</td>
 <td>“Drug A works better <em>for patients with the same severity</em>”</td>
 </tr>
@@ -1846,17 +1856,6 @@
 <p><strong>Key insight:</strong> The coefficient answers “what if we could compare people who are identical except for group membership?”</p>
 <p><strong>We typically won’t have two people like Ian and Nina where we can make this comparison. We need to base the comparison on the difference in the regression lines as reflected in the regression coefficient.</strong></p>
 </section>
-<section id="quick-discussion" class="slide level2 content-light">
-<h2>Quick Discussion</h2>
-<blockquote>
-<p>“What does ‘holding education constant’ mean, using the Ian and Nina example?”</p>
-</blockquote>
-<p><strong>Rules:</strong></p>
-<ul>
-<li>Use plain English (no jargon like “controlling for” or “covariate”)</li>
-<li>Imagine explaining to a friend who hasn’t taken this class</li>
-</ul>
-</section>
 <section id="polling-question-4-holding-constant" class="slide level2 content-light">
 <h2>Polling Question 4: Holding Constant</h2>
 <p>This is the key concept. Take your time.</p>
@@ -1889,8 +1888,8 @@
 <li><strong>D is wrong:</strong> Correlation is a separate statistic (and would be between 0 and 1)</li>
 </ul>
 </section>
-<section id="additional-statistics-onboarding-models" class="slide level2">
-<h2>Additional Statistics: Onboarding Models</h2>
+<section id="additional-statistics-onboarding-models-1" class="slide level2">
+<h2>Additional Statistics: Onboarding Models 1</h2>
 <p><strong>R² from glance() for both models:</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">glance</span>(lm_program_only)  <span class="co"># Unadjusted model</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2003,9 +2002,9 @@
 </div>
 </div>
 </section>
-<section id="additional-statistics-onboarding-models-1b" class="slide level2 smaller">
-<h2>Additional Statistics: Onboarding Models 1b</h2>
-<p><strong>95% Confidence Intervals for R² using MBESS:</strong></p>
+<section id="additional-statistics-onboarding-models-2" class="slide level2">
+<h2>Additional Statistics: Onboarding Models 2</h2>
+<p><strong>95% Confidence Intervals for R² using MBESS Unadjusted:</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">library</span>(MBESS)</span>
 <span id="cb13-2"><a href=""></a></span>
@@ -2029,6 +2028,10 @@ $Prob.Greater.Upper
 [1] 0.025</code></pre>
 </div>
 </div>
+</section>
+<section id="additional-statistics-onboarding-models-3" class="slide level2">
+<h2>Additional Statistics: Onboarding Models 3</h2>
+<p><strong>95% Confidence Intervals for R² using MBESS Combined:</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="co"># For adjusted model: 2 predictors (program + education)</span></span>
 <span id="cb15-2"><a href=""></a><span class="fu">ci.R2</span>(<span class="at">R2 =</span> <span class="fu">glance</span>(lm_combined)<span class="sc">$</span>r.squared,</span>
@@ -2051,8 +2054,8 @@ $Prob.Greater.Upper
 </div>
 </div>
 </section>
-<section id="additional-statistics-onboarding-models-2" class="slide level2 smaller">
-<h2>Additional Statistics: Onboarding Models 2</h2>
+<section id="additional-statistics-onboarding-models-4" class="slide level2">
+<h2>Additional Statistics: Onboarding Models 4</h2>
 <p><strong>Cohen’s d for unadjusted comparison:</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">library</span>(effsize)</span>
@@ -2068,8 +2071,8 @@ d estimate: -1.983874 (large)
 </div>
 </div>
 </section>
-<section id="additional-statistics-onboarding-models-3" class="slide level2 smaller">
-<h2>Additional Statistics: Onboarding Models 3</h2>
+<section id="additional-statistics-onboarding-models-5" class="slide level2 smaller">
+<h2>Additional Statistics: Onboarding Models 5</h2>
 <p><strong>Partial Eta Squared for both models:</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">library</span>(effectsize)</span>
@@ -2114,8 +2117,8 @@ education |           0.66 | [0.47, 1.00]
 </div>
 </div>
 </section>
-<section id="additional-statistics-onboarding-models-4" class="slide level2 smaller">
-<h2>Additional Statistics: Onboarding Models 4</h2>
+<section id="additional-statistics-onboarding-models-6" class="slide level2 smaller">
+<h2>Additional Statistics: Onboarding Models 6</h2>
 <p><strong>Descriptive Statistics by Program:</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>onboard_data <span class="sc">%&gt;%</span></span>
@@ -2157,8 +2160,8 @@ education |           0.66 | [0.47, 1.00]
 </div>
 </div>
 </section>
-<section id="results-paragraph-onboarding" class="slide level2 results-paragraph">
-<h2>Results Paragraph: Onboarding</h2>
+<section id="results-paragraph-onboarding-1" class="slide level2 results-paragraph">
+<h2>Results Paragraph: Onboarding 1</h2>
 <p>We examined whether the new onboarding program improved performance ratings compared to the old program (<em>N</em> = 20; old program <em>n</em> = 10, new program <em>n</em> = 10). We conducted two analyses: an unadjusted analysis comparing programs directly, and an adjusted analysis accounting for employees’ education levels.</p>
 </section>
 <section id="results-paragraph-onboarding-2" class="slide level2 results-paragraph">
@@ -2184,6 +2187,9 @@ education |           0.66 | [0.47, 1.00]
 <p><strong>Comparing Unadjusted and Adjusted Analyses</strong></p>
 <p>The unadjusted and adjusted analyses tell different stories about the magnitude of the program effect. In the unadjusted analysis, the program coefficient was <em>b</em> = 13.72, 95% CI [7.22, 20.22], suggesting a substantial performance advantage. After adjusting for education, the coefficient dropped to <em>b</em> = 5.33, 95% CI [0.34, 10.33]—a reduction of 8.39 points.</p>
 <p>This reduction occurred because new-program employees had substantially more education (17 vs.&nbsp;14.6 years). The unadjusted comparison confounded the program effect with the education effect. When we statistically held education constant, the estimated program effect was considerably smaller. In terms of effect size, the program accounted for <span class="math inline">\(\eta^2_p\)</span> = 0.76, 90% CI [0.9, 0.62], of the variance in performance after controlling for education.</p>
+</section>
+<section id="results-paragraph-onboarding-6" class="slide level2 results-paragraph">
+<h2>Results Paragraph: Onboarding 6</h2>
 <p><strong>Conclusion.</strong> After controlling for education, the new program was still associated with higher performance (<em>b</em> = 5.33 points), but much of its apparent advantage in the unadjusted analysis can be accounted for by education differences between groups. Because employees were not randomly assigned to programs, other unmeasured differences between groups may also influence these estimates.</p>
 </section>
 <section id="polling-question-5" class="slide level2 content-light">
@@ -2236,7 +2242,7 @@ education |           0.66 | [0.47, 1.00]
 </div>
 </div>
 </div>
-<p>After centering, the intercept = predicted performance at <strong>mean</strong> education (15.8 years—a realistic person!)</p>
+<p>After centering, the intercept = predicted performance for the <strong>reference group</strong> (old program) at <strong>mean</strong> education (15.8 years—a realistic person!)</p>
 </section>
 <section id="grand-mean-centering-a-visual-animation" class="slide level2" data-transition="none">
 <h2>Grand Mean Centering: A Visual Animation</h2>
@@ -2696,7 +2702,7 @@ education |           0.66 | [0.47, 1.00]
 </div>
 </div>
 </div>
-<p><strong>Intercept interpretation:</strong> Expected performance when education = 0 years (not meaningful!)</p>
+<p><strong>Intercept interpretation:</strong> Expected performance for the <strong>old program</strong> (reference group) when education = 0 years (not meaningful!)</p>
 </section>
 <section id="grand-mean-centered-model-plot" class="slide level2 content-light" data-transition="none">
 <h2>Grand Mean Centered Model: Plot</h2>
@@ -2709,7 +2715,746 @@ education |           0.66 | [0.47, 1.00]
 </div>
 </div>
 </div>
-<p><strong>Intercept interpretation:</strong> Expected performance at the mean education level (15.8 years)—a realistic, interpretable value!</p>
+<p><strong>Intercept interpretation:</strong> Expected performance for the <strong>old program</strong> (reference group) at the mean education level (15.8 years)—a realistic, interpretable value!</p>
+</section>
+<section id="grand-mean-centered-scatter-animation" class="slide level2" data-transition="none">
+<h2>Grand Mean Centered Scatter Animation</h2>
+<style>
+  #gmc-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+    width: 100%;
+  }
+
+  #gmc-container {
+    width: 100%;
+    max-width: 1920px;
+    aspect-ratio: 1920 / 1080;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  #gmc-container svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .gmc-title {
+    font-size: 36px;
+    font-weight: bold;
+    text-anchor: middle;
+    transition: fill 2s ease-in-out;
+  }
+
+  .gmc-axis-label {
+    font-size: 28px;
+    font-weight: bold;
+    text-anchor: middle;
+  }
+
+  .gmc-axis-label-y {
+    font-size: 28px;
+    font-weight: bold;
+    text-anchor: middle;
+  }
+
+  .gmc-tick-label {
+    font-size: 20px;
+    text-anchor: middle;
+  }
+
+  .gmc-annotation {
+    font-size: 28px;
+    font-weight: bold;
+    text-anchor: middle;
+  }
+
+  .gmc-zero-label {
+    font-size: 22px;
+    font-style: italic;
+    text-anchor: start;
+  }
+
+  .gmc-bracket-label {
+    font-size: 22px;
+    font-weight: bold;
+    text-anchor: middle;
+  }
+
+  .gmc-legend-text {
+    font-size: 22px;
+    text-anchor: start;
+  }
+
+  .gmc-legend-title {
+    font-size: 22px;
+    font-weight: bold;
+    text-anchor: start;
+  }
+
+  .gmc-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .gmc-fade-in {
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .gmc-data-point {
+    transition: cx 2s ease-in-out;
+  }
+
+  .gmc-data-triangle {
+    transition: transform 2s ease-in-out;
+  }
+
+  .gmc-reg-line {
+    transition: d 2s ease-in-out;
+  }
+
+  #gmc-bracket-group {
+    transition: transform 2s ease-in-out;
+  }
+
+  #gmc-reg-lines-group {
+    transition: transform 2s ease-in-out;
+  }
+
+  .gmc-zero-line-group {
+    transition: opacity 0.5s ease-in-out;
+  }
+</style>
+<div id="gmc-wrapper">
+<div id="gmc-container">
+
+</div>
+</div>
+<div class="fragment" data-fragment-index="1">
+
+</div>
+<div class="fragment" data-fragment-index="2">
+
+</div>
+<div class="fragment" data-fragment-index="3">
+
+</div>
+<div class="fragment" data-fragment-index="4">
+
+</div>
+<div class="fragment" data-fragment-index="5">
+
+</div>
+<div class="fragment" data-fragment-index="6">
+
+</div>
+<div class="fragment" data-fragment-index="7">
+
+</div>
+<div class="fragment" data-fragment-index="8">
+
+</div>
+<div class="fragment" data-fragment-index="9">
+
+</div>
+<script>
+(function() {
+  // ============================================
+  // DATA (exact values from R)
+  // ============================================
+  // Old Program (coral #F8766D, circles)
+  var oldEdu = [12, 14, 13, 16, 15, 14, 17, 14, 16, 15];
+  var oldPerf = [54.6, 67.5, 65.7, 64.4, 64.6, 63.7, 75.3, 66.0, 74.0, 69.8];
+
+  // New Program (teal #00BFC4, triangles)
+  var newEdu = [15, 18, 16, 20, 17, 16, 19, 15, 18, 16];
+  var newPerf = [67.8, 84.2, 78.0, 90.6, 70.7, 81.8, 88.4, 73.0, 88.1, 80.2];
+
+  var grandMeanEdu = 15.8;
+
+  // Coefficient values from R:
+  // lm(performance ~ program + education) and lm(performance ~ program + education_c)
+  // both give programnew = 5.33 (grand mean centering doesn't change the program coefficient)
+  var programCoef = 5.33;
+
+  // Regression parameters from R: lm(performance ~ program + education)
+  // Intercept = 15.5418, programnew = 5.3334, slope = 3.4944
+  // At grand mean (15.8): y_old = 15.5418 + 3.4944 * 15.8 = 70.753
+  var slope = 3.4944;
+  var interceptOld = 15.5418;
+  var interceptNew = interceptOld + programCoef;
+
+  // Colors
+  var coralColor = '#F8766D';
+  var tealColor = '#00BFC4';
+  var zeroLineColor = '#00FFFF';
+
+  // ============================================
+  // SVG COORDINATE MAPPING (1920x1080)
+  // ============================================
+  var svgWidth = 1920;
+  var svgHeight = 1080;
+  var marginLeft = 150;
+  var marginRight = 200;
+  var marginTop = 100;
+  var marginBottom = 120;
+
+  var plotWidth = svgWidth - marginLeft - marginRight;
+  var plotHeight = svgHeight - marginTop - marginBottom;
+
+  // Data ranges - must match the y-axis tick labels (50, 60, 70, 80, 90)
+  var xMin = -5;
+  var xMax = 20;
+  var yMin = 50;
+  var yMax = 90;
+
+  // No offset - coordinate system matches axis labels directly
+  var yDataOffset = 0;
+
+  function xToSvg(val) {
+    return marginLeft + ((val - xMin) / (xMax - xMin)) * plotWidth;
+  }
+
+  function yToSvg(val) {
+    return marginTop + ((yMax - val) / (yMax - yMin)) * plotHeight;
+  }
+
+  // ============================================
+  // SVG ELEMENT CREATION HELPERS
+  // ============================================
+  var svgNS = "http://www.w3.org/2000/svg";
+  var svg = null;
+
+  function createLine(x1, y1, x2, y2, stroke, strokeWidth, id) {
+    var line = document.createElementNS(svgNS, 'line');
+    line.setAttribute('x1', x1);
+    line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2);
+    line.setAttribute('y2', y2);
+    line.setAttribute('stroke', stroke || '#333');
+    line.setAttribute('stroke-width', strokeWidth || 2);
+    if (id) line.setAttribute('id', id);
+    return line;
+  }
+
+  function createText(x, y, text, className, fill, id) {
+    var textEl = document.createElementNS(svgNS, 'text');
+    textEl.setAttribute('x', x);
+    textEl.setAttribute('y', y);
+    textEl.setAttribute('fill', fill || '#333');
+    if (className) textEl.setAttribute('class', className);
+    if (id) textEl.setAttribute('id', id);
+    textEl.textContent = text;
+    return textEl;
+  }
+
+  function createCircle(cx, cy, r, fill, className, id) {
+    var circle = document.createElementNS(svgNS, 'circle');
+    circle.setAttribute('cx', cx);
+    circle.setAttribute('cy', cy);
+    circle.setAttribute('r', r);
+    circle.setAttribute('fill', fill);
+    if (className) circle.setAttribute('class', className);
+    if (id) circle.setAttribute('id', id);
+    return circle;
+  }
+
+  function createPolygon(points, fill, className, id) {
+    var polygon = document.createElementNS(svgNS, 'polygon');
+    polygon.setAttribute('points', points);
+    polygon.setAttribute('fill', fill);
+    if (className) polygon.setAttribute('class', className);
+    if (id) polygon.setAttribute('id', id);
+    return polygon;
+  }
+
+  function createRect(x, y, width, height, fill, rx, id) {
+    var rect = document.createElementNS(svgNS, 'rect');
+    rect.setAttribute('x', x);
+    rect.setAttribute('y', y);
+    rect.setAttribute('width', width);
+    rect.setAttribute('height', height);
+    rect.setAttribute('fill', fill);
+    rect.setAttribute('rx', rx || 0);
+    if (id) rect.setAttribute('id', id);
+    return rect;
+  }
+
+  function createGroup(id, className) {
+    var g = document.createElementNS(svgNS, 'g');
+    if (id) g.setAttribute('id', id);
+    if (className) g.setAttribute('class', className);
+    return g;
+  }
+
+  function trianglePoints(cx, cy, size) {
+    size = size || 10;
+    var h = size * Math.sqrt(3) / 2;
+    return cx + ',' + (cy - h) + ' ' + (cx - size) + ',' + (cy + h) + ' ' + (cx + size) + ',' + (cy + h);
+  }
+
+  // ============================================
+  // BUILD SVG ELEMENTS
+  // ============================================
+  function buildSVG() {
+    var container = document.getElementById('gmc-container');
+    if (!container) {
+      console.error('GMC animation container not found');
+      return false;
+    }
+
+    // Create SVG dynamically
+    svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', '0 0 1920 1080');
+    svg.setAttribute('id', 'gmc-svg');
+    container.appendChild(svg);
+
+    // Background rounded rectangle
+    var bgRect = createRect(40, 20, svgWidth - 80, svgHeight - 40, 'rgba(0, 0, 0, 0.75)', 20, 'gmc-bg-rect');
+    bgRect.setAttribute('class', 'gmc-hidden gmc-fade-in');
+    svg.appendChild(bgRect);
+
+    // Title
+    var title = createText(svgWidth / 2, 70, 'Grand Mean Centering', 'gmc-title gmc-hidden gmc-fade-in', '#ffffff', 'gmc-main-title');
+    svg.appendChild(title);
+
+    // Axes group
+    var axisGroup = createGroup('gmc-axis-group', 'gmc-hidden gmc-fade-in');
+
+    // X-axis line
+    axisGroup.appendChild(createLine(xToSvg(xMin), yToSvg(yMin), xToSvg(xMax), yToSvg(yMin), '#ffffff', 2));
+
+    // Y-axis line
+    axisGroup.appendChild(createLine(xToSvg(xMin), yToSvg(yMin), xToSvg(xMin), yToSvg(yMax), '#ffffff', 2));
+
+    // X-axis ticks and labels
+    for (var val = -5; val <= 20; val += 5) {
+      var x = xToSvg(val);
+      axisGroup.appendChild(createLine(x, yToSvg(yMin), x, yToSvg(yMin) + 8, '#ffffff', 2));
+      var label = createText(x, yToSvg(yMin) + 30, val.toString(), 'gmc-tick-label', '#ffffff');
+      axisGroup.appendChild(label);
+    }
+
+    // Y-axis ticks and labels
+    for (var val = 50; val <= 90; val += 10) {
+      var y = yToSvg(val);
+      axisGroup.appendChild(createLine(xToSvg(xMin) - 8, y, xToSvg(xMin), y, '#ffffff', 2));
+      var label = createText(xToSvg(xMin) - 40, y + 6, val.toString(), 'gmc-tick-label', '#ffffff');
+      label.setAttribute('text-anchor', 'end');
+      axisGroup.appendChild(label);
+    }
+
+    // X-axis label
+    var xAxisLabel = createText(svgWidth / 2, yToSvg(yMin) + 80, 'Years of Education (Uncentered)', 'gmc-axis-label', '#ffffff', 'gmc-x-axis-label');
+    axisGroup.appendChild(xAxisLabel);
+
+    // Y-axis label (rotated)
+    var yAxisLabel = createText(0, 0, 'Performance Rating', 'gmc-axis-label-y', '#ffffff');
+    yAxisLabel.setAttribute('transform', 'translate(60, ' + (svgHeight / 2) + ') rotate(-90)');
+    axisGroup.appendChild(yAxisLabel);
+
+    svg.appendChild(axisGroup);
+
+    // Grid lines
+    var gridGroup = createGroup('gmc-grid-group', 'gmc-hidden gmc-fade-in');
+    for (var val = -5; val <= 20; val += 5) {
+      if (val !== xMin) {
+        var line = createLine(xToSvg(val), yToSvg(yMin), xToSvg(val), yToSvg(yMax), 'rgba(255,255,255,0.15)', 1);
+        gridGroup.appendChild(line);
+      }
+    }
+    for (var val = 60; val <= 90; val += 10) {
+      var line = createLine(xToSvg(xMin), yToSvg(val), xToSvg(xMax), yToSvg(val), 'rgba(255,255,255,0.15)', 1);
+      gridGroup.appendChild(line);
+    }
+    svg.appendChild(gridGroup);
+
+    // Regression lines group
+    var regLinesGroup = createGroup('gmc-reg-lines-group', 'gmc-hidden gmc-fade-in');
+
+    var oldLineX1 = 12, oldLineX2 = 17;
+    var oldLineY1 = interceptOld + slope * oldLineX1 + yDataOffset;
+    var oldLineY2 = interceptOld + slope * oldLineX2 + yDataOffset;
+
+    var newLineX1 = 15, newLineX2 = 20;
+    var newLineY1 = interceptNew + slope * newLineX1 + yDataOffset;
+    var newLineY2 = interceptNew + slope * newLineX2 + yDataOffset;
+
+    var oldRegLine = createLine(xToSvg(oldLineX1), yToSvg(oldLineY1), xToSvg(oldLineX2), yToSvg(oldLineY2), coralColor, 3, 'gmc-old-reg-line');
+    oldRegLine.setAttribute('class', 'gmc-reg-line');
+    regLinesGroup.appendChild(oldRegLine);
+
+    var newRegLine = createLine(xToSvg(newLineX1), yToSvg(newLineY1), xToSvg(newLineX2), yToSvg(newLineY2), tealColor, 3, 'gmc-new-reg-line');
+    newRegLine.setAttribute('class', 'gmc-reg-line');
+    regLinesGroup.appendChild(newRegLine);
+
+    svg.appendChild(regLinesGroup);
+
+    // Data points group
+    var pointsGroup = createGroup('gmc-points-group', 'gmc-hidden gmc-fade-in');
+
+    // Old Program points (circles)
+    for (var i = 0; i < oldEdu.length; i++) {
+      var x = xToSvg(oldEdu[i]);
+      var y = yToSvg(oldPerf[i] + yDataOffset);
+      var circle = createCircle(x, y, 10, coralColor, 'gmc-data-point', 'gmc-old-point-' + i);
+      pointsGroup.appendChild(circle);
+    }
+
+    // New Program points (triangles)
+    for (var i = 0; i < newEdu.length; i++) {
+      var x = xToSvg(newEdu[i]);
+      var y = yToSvg(newPerf[i] + yDataOffset);
+      var triangle = createPolygon(trianglePoints(x, y, 10), tealColor, 'gmc-data-triangle', 'gmc-new-point-' + i);
+      triangle.setAttribute('data-orig-x', x);
+      triangle.setAttribute('data-y', y);
+      pointsGroup.appendChild(triangle);
+    }
+
+    svg.appendChild(pointsGroup);
+
+    // Legend
+    var legendGroup = createGroup('gmc-legend-group', 'gmc-hidden gmc-fade-in');
+    var legendX = svgWidth - 280;
+    var legendY = 700;
+
+    legendGroup.appendChild(createText(legendX, legendY, 'program', 'gmc-legend-title', '#ffffff'));
+    legendGroup.appendChild(createCircle(legendX + 10, legendY + 35, 8, coralColor));
+    legendGroup.appendChild(createText(legendX + 30, legendY + 40, 'Old Program', 'gmc-legend-text', '#ffffff'));
+    legendGroup.appendChild(createPolygon(trianglePoints(legendX + 10, legendY + 65, 8), tealColor));
+    legendGroup.appendChild(createText(legendX + 30, legendY + 70, 'New Program', 'gmc-legend-text', '#ffffff'));
+
+    svg.appendChild(legendGroup);
+
+    // Starting label
+    var startLabel = createText(svgWidth / 2, 120, 'UNCENTERED: Intercept = performance when education = 0', 'gmc-annotation gmc-hidden gmc-fade-in', '#ffffff', 'gmc-start-label');
+    startLabel.setAttribute('font-size', '28px');
+    svg.appendChild(startLabel);
+
+    // Cyan zero line group (initial)
+    var grayZeroGroup = createGroup('gmc-gray-zero-group', 'gmc-hidden gmc-fade-in');
+    var zeroX = xToSvg(0);
+    var zeroLine = createLine(zeroX, yToSvg(yMax), zeroX, yToSvg(yMin), zeroLineColor, 3);
+    zeroLine.setAttribute('stroke-dasharray', '8,4');
+    grayZeroGroup.appendChild(zeroLine);
+
+    var zeroLabel = createText(zeroX + 8, yToSvg(90), 'Zero', 'gmc-zero-label', zeroLineColor);
+    grayZeroGroup.appendChild(zeroLabel);
+    var zeroLabel2 = createText(zeroX + 8, yToSvg(90) + 20, '(unrealistic)', 'gmc-zero-label', zeroLineColor);
+    grayZeroGroup.appendChild(zeroLabel2);
+
+    svg.appendChild(grayZeroGroup);
+
+    // Bracket annotation group
+    var bracketGroup = createGroup('gmc-bracket-group', 'gmc-hidden gmc-fade-in');
+
+    var bracketX = 16;
+    var bracketSvgX = xToSvg(bracketX);
+    // Use exact intercept values for bracket endpoints
+    var yOldLine = 70.753;
+    var yNewLine = 70.753 + 5.33;
+
+    var bracketTopY = yToSvg(yNewLine);
+    var bracketBottomY = yToSvg(yOldLine);
+
+    var bracketColor = '#ffff00';
+    var bracketWidth = 4;
+
+    bracketGroup.appendChild(createLine(bracketSvgX, bracketTopY, bracketSvgX, bracketBottomY, bracketColor, bracketWidth));
+
+    var capLength = 12;
+    bracketGroup.appendChild(createLine(bracketSvgX - capLength, bracketTopY, bracketSvgX, bracketTopY, bracketColor, bracketWidth));
+    bracketGroup.appendChild(createLine(bracketSvgX - capLength, bracketBottomY, bracketSvgX, bracketBottomY, bracketColor, bracketWidth));
+
+    var labelBgWidth = 85;
+    var labelBgHeight = 42;
+    var labelBgX = bracketSvgX - capLength - labelBgWidth - 8;
+    var labelBgY = (bracketTopY + bracketBottomY) / 2 - labelBgHeight / 2;
+
+    var labelBg = createRect(labelBgX, labelBgY, labelBgWidth, labelBgHeight, 'rgba(0, 0, 0, 0.9)', 6);
+    labelBg.setAttribute('stroke', bracketColor);
+    labelBg.setAttribute('stroke-width', '3');
+    bracketGroup.appendChild(labelBg);
+
+    var bracketLabel = createText(labelBgX + labelBgWidth / 2, labelBgY + 30, '5.33', 'gmc-bracket-label', bracketColor);
+    bracketLabel.setAttribute('text-anchor', 'middle');
+    bracketLabel.setAttribute('font-size', '28px');
+    bracketLabel.setAttribute('font-weight', 'bold');
+    bracketGroup.appendChild(bracketLabel);
+
+    bracketGroup.setAttribute('data-base-x', bracketSvgX);
+
+    svg.appendChild(bracketGroup);
+
+    // Centering annotation
+    var centerAnnotation = createText(svgWidth / 2, 170, 'We will subtract the grand mean (15.8) from all education values', 'gmc-annotation gmc-hidden gmc-fade-in', '#ffff00', 'gmc-center-annotation');
+    svg.appendChild(centerAnnotation);
+
+    // Blue zero line group (final)
+    var blueZeroGroup = createGroup('gmc-blue-zero-group', 'gmc-hidden gmc-fade-in');
+    var blueZeroX = xToSvg(0);
+    var blueZeroLine = createLine(blueZeroX, yToSvg(yMax), blueZeroX, yToSvg(yMin), zeroLineColor, 3);
+    blueZeroLine.setAttribute('stroke-dasharray', '8,4');
+    blueZeroGroup.appendChild(blueZeroLine);
+
+    var blueZeroLabel = createText(blueZeroX + 8, yToSvg(90), 'Zero = Grand Mean', 'gmc-zero-label', zeroLineColor);
+    blueZeroGroup.appendChild(blueZeroLabel);
+
+    svg.appendChild(blueZeroGroup);
+
+    // Centered X-axis label
+    var centeredXLabel = createText(svgWidth / 2, yToSvg(yMin) + 80, 'Education (Grand Mean Centered)', 'gmc-axis-label gmc-hidden gmc-fade-in', zeroLineColor, 'gmc-centered-x-label');
+    svg.appendChild(centeredXLabel);
+
+    // Highlight text
+    var highlightText = createText(svgWidth / 2, yToSvg(55), 'Zero now represents the average education level (15.8 years)', 'gmc-annotation gmc-hidden gmc-fade-in', zeroLineColor, 'gmc-highlight-text');
+    svg.appendChild(highlightText);
+
+    console.log('GMC animation SVG built successfully');
+    return true;
+  }
+
+  // ============================================
+  // SHOW/HIDE HELPERS
+  // ============================================
+  function showEl(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('gmc-hidden');
+  }
+
+  function hideEl(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('gmc-hidden');
+  }
+
+  // ============================================
+  // ANIMATION HELPER
+  // ============================================
+  function animateShift() {
+    var shiftAmount = grandMeanEdu;
+    var shiftPixels = (shiftAmount / (xMax - xMin)) * plotWidth;
+
+    // Animate Old Program circles
+    for (var i = 0; i < oldEdu.length; i++) {
+      var point = document.getElementById('gmc-old-point-' + i);
+      var newX = xToSvg(oldEdu[i] - shiftAmount);
+      point.setAttribute('cx', newX);
+    }
+
+    // Animate New Program triangles
+    for (var i = 0; i < newEdu.length; i++) {
+      var triangle = document.getElementById('gmc-new-point-' + i);
+      triangle.style.transform = 'translateX(-' + shiftPixels + 'px)';
+    }
+
+    // Animate regression lines
+    var regLinesGroup = document.getElementById('gmc-reg-lines-group');
+    regLinesGroup.style.transform = 'translateX(-' + shiftPixels + 'px)';
+
+    // Animate bracket
+    var bracketGroup = document.getElementById('gmc-bracket-group');
+    bracketGroup.style.transform = 'translateX(-' + shiftPixels + 'px)';
+  }
+
+  // ============================================
+  // RESET ANIMATION
+  // ============================================
+  function resetAnimation() {
+    console.log('GMC: Resetting animation to initial state');
+
+    // Hide all animated elements
+    hideEl('gmc-bg-rect');
+    hideEl('gmc-main-title');
+    hideEl('gmc-axis-group');
+    hideEl('gmc-grid-group');
+    hideEl('gmc-points-group');
+    hideEl('gmc-reg-lines-group');
+    hideEl('gmc-legend-group');
+    hideEl('gmc-start-label');
+    hideEl('gmc-gray-zero-group');
+    hideEl('gmc-bracket-group');
+    hideEl('gmc-center-annotation');
+    hideEl('gmc-blue-zero-group');
+    hideEl('gmc-centered-x-label');
+    hideEl('gmc-highlight-text');
+
+    // Reset title text and color
+    var title = document.getElementById('gmc-main-title');
+    if (title) {
+      title.textContent = 'Grand Mean Centering';
+      title.setAttribute('fill', '#ffffff');
+    }
+
+    // Reset x-axis label visibility
+    var xAxisLabel = document.getElementById('gmc-x-axis-label');
+    if (xAxisLabel) {
+      xAxisLabel.style.opacity = '1';
+    }
+
+    // Reset point positions
+    for (var i = 0; i < oldEdu.length; i++) {
+      var point = document.getElementById('gmc-old-point-' + i);
+      if (point) {
+        point.setAttribute('cx', xToSvg(oldEdu[i]));
+      }
+    }
+
+    // Reset triangle transforms
+    for (var i = 0; i < newEdu.length; i++) {
+      var triangle = document.getElementById('gmc-new-point-' + i);
+      if (triangle) {
+        triangle.style.transform = '';
+      }
+    }
+
+    // Reset regression lines transform
+    var regLinesGroup = document.getElementById('gmc-reg-lines-group');
+    if (regLinesGroup) {
+      regLinesGroup.style.transform = '';
+    }
+
+    // Reset bracket transform
+    var bracketGroup = document.getElementById('gmc-bracket-group');
+    if (bracketGroup) {
+      bracketGroup.style.transform = '';
+    }
+  }
+
+  // ============================================
+  // RENDER FRAME
+  // ============================================
+  function renderFrame(frame) {
+    console.log('GMC: Rendering frame:', frame);
+
+    switch (frame) {
+      case 1: // Title + background
+        showEl('gmc-bg-rect');
+        showEl('gmc-main-title');
+        break;
+
+      case 2: // Scatterplot
+        showEl('gmc-axis-group');
+        showEl('gmc-grid-group');
+        showEl('gmc-points-group');
+        showEl('gmc-reg-lines-group');
+        showEl('gmc-legend-group');
+        break;
+
+      case 3: // Starting label + zero line
+        showEl('gmc-start-label');
+        showEl('gmc-gray-zero-group');
+        break;
+
+      case 4: // Show bracket
+        showEl('gmc-bracket-group');
+        break;
+
+      case 5: // Centering annotation
+        showEl('gmc-center-annotation');
+        break;
+
+      case 6: // ANIMATE - shift everything left
+        hideEl('gmc-center-annotation');
+        hideEl('gmc-gray-zero-group');
+        hideEl('gmc-start-label');
+        showEl('gmc-blue-zero-group');
+        animateShift();
+
+        var title = document.getElementById('gmc-main-title');
+        if (title) {
+          title.textContent = 'GRAND MEAN CENTERED: Intercept = performance at overall mean education';
+          title.setAttribute('fill', zeroLineColor);
+        }
+        break;
+
+      case 7: // Show centered state
+        hideEl('gmc-start-label');
+        var xAxisLabel = document.getElementById('gmc-x-axis-label');
+        if (xAxisLabel) xAxisLabel.style.opacity = '0';
+        showEl('gmc-centered-x-label');
+        showEl('gmc-blue-zero-group');
+        break;
+
+      case 8: // Highlight text
+        showEl('gmc-highlight-text');
+        break;
+
+      case 9: // Fade out
+        hideEl('gmc-bg-rect');
+        hideEl('gmc-main-title');
+        hideEl('gmc-axis-group');
+        hideEl('gmc-grid-group');
+        hideEl('gmc-points-group');
+        hideEl('gmc-reg-lines-group');
+        hideEl('gmc-legend-group');
+        hideEl('gmc-bracket-group');
+        hideEl('gmc-blue-zero-group');
+        hideEl('gmc-centered-x-label');
+        hideEl('gmc-highlight-text');
+        break;
+    }
+  }
+
+  // ============================================
+  // INITIALIZATION
+  // ============================================
+  function init() {
+    console.log('GMC: Initializing animation...');
+
+    if (!buildSVG()) {
+      console.error('GMC: Failed to build SVG');
+      return;
+    }
+
+    if (typeof Reveal !== 'undefined') {
+      console.log('GMC: Reveal.js detected, attaching fragment listener');
+
+      Reveal.on('fragmentshown', function(event) {
+        var currentSlide = Reveal.getCurrentSlide();
+        var slideId = currentSlide ? currentSlide.getAttribute('id') : null;
+        if (slideId !== 'grand-mean-centered-scatter-animation') {
+          return;
+        }
+        var idx = event.fragment.getAttribute('data-fragment-index');
+        console.log('GMC: Fragment shown, index:', idx);
+        if (idx) renderFrame(parseInt(idx));
+      });
+
+      Reveal.on('slidechanged', function(event) {
+        var slideId = event.currentSlide.getAttribute('id');
+        if (slideId === 'grand-mean-centered-scatter-animation') {
+          console.log('GMC: Entering animation slide, resetting...');
+          resetAnimation();
+        }
+      });
+    } else {
+      console.warn('GMC: Reveal.js not found');
+    }
+  }
+
+  // Initialize when Reveal is ready
+  if (typeof Reveal !== 'undefined' && Reveal.isReady && Reveal.isReady()) {
+    init();
+  } else if (typeof Reveal !== 'undefined') {
+    Reveal.on('ready', init);
+  } else {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        if (typeof Reveal !== 'undefined') {
+          if (Reveal.isReady && Reveal.isReady()) {
+            init();
+          } else {
+            Reveal.on('ready', init);
+          }
+        }
+      }, 100);
+    });
+  }
+})();
+</script>
 </section>
 <section id="comparing-the-two-centering-models" class="slide level2 smaller" data-transition="none">
 <h2>Comparing the Two Centering Models</h2>
@@ -2833,7 +3578,7 @@ education |           0.66 | [0.47, 1.00]
 </div>
 <p><strong>What changed?</strong> Only the intercept! The program and education coefficients are identical.</p>
 <ul>
-<li><strong>Intercept:</strong> Changed from 15.5 to 70.8. Now represents predicted performance at <em>mean</em> education (15.8 years) rather than at 0 years.</li>
+<li><strong>Intercept:</strong> Changed from 15.5 to 70.8. Now represents predicted performance for the <strong>old program</strong> (reference group) at <em>mean</em> education (15.8 years) rather than at 0 years.</li>
 <li><strong>Slopes:</strong> Unchanged—centering shifts the zero point but doesn’t change the relationships between variables.</li>
 </ul>
 </section>
@@ -2863,7 +3608,7 @@ education |           0.66 | [0.47, 1.00]
 <tr class="even">
 <td>Grand mean</td>
 <td>Overall mean education</td>
-<td>Performance at mean education (across all employees)</td>
+<td>Performance at mean education (for reference group)</td>
 </tr>
 <tr class="odd">
 <td>Group mean</td>
@@ -3568,7 +4313,7 @@ education |           0.66 | [0.47, 1.00]
 </div>
 </div>
 </div>
-<p><strong>Intercept interpretation:</strong> Expected performance when education = 0 years (not meaningful!)</p>
+<p><strong>Intercept interpretation:</strong> Expected performance for the <strong>old program</strong> (reference group) when education = 0 years (not meaningful!)</p>
 </section>
 <section id="grand-mean-centered-model-review" class="slide level2" data-transition="none">
 <h2>Grand Mean Centered Model (Review)</h2>
@@ -3581,7 +4326,7 @@ education |           0.66 | [0.47, 1.00]
 </div>
 </div>
 </div>
-<p><strong>Intercept interpretation:</strong> Expected performance at the grand mean education (15.8 years)</p>
+<p><strong>Intercept interpretation:</strong> Expected performance for the <strong>old program</strong> (reference group) at the grand mean education (15.8 years)</p>
 </section>
 <section id="group-mean-centered-model-new" class="slide level2" data-transition="none">
 <h2>Group Mean Centered Model (New)</h2>
@@ -3596,6 +4341,923 @@ education |           0.66 | [0.47, 1.00]
 </div>
 <p><strong>Program coefficient (13.72):</strong> This is the <strong>unadjusted</strong> difference between groups—the same value we got from <code>lm(performance ~ program)</code> without education in the model (13.72).</p>
 <p><strong>Why?</strong> Group mean centering compares groups at their <em>own</em> mean education levels, not at a <em>common</em> education level. This removes the statistical control for education differences between groups.</p>
+</section>
+<section id="group-mean-centered-scatter-animation" class="slide level2" data-transition="none">
+<h2>Group Mean Centered Scatter Animation</h2>
+<style>
+  #grmc-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+    width: 100%;
+  }
+
+  #grmc-container {
+    width: 100%;
+    max-width: 1920px;
+    aspect-ratio: 1920 / 1080;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  #grmc-container svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .grmc-title {
+    font-size: 36px;
+    font-weight: bold;
+    text-anchor: middle;
+    transition: fill 2s ease-in-out;
+  }
+
+  .grmc-axis-label {
+    font-size: 28px;
+    font-weight: bold;
+    text-anchor: middle;
+  }
+
+  .grmc-axis-label-y {
+    font-size: 28px;
+    font-weight: bold;
+    text-anchor: middle;
+  }
+
+  .grmc-tick-label {
+    font-size: 20px;
+    text-anchor: middle;
+  }
+
+  .grmc-annotation {
+    font-size: 28px;
+    font-weight: bold;
+    text-anchor: middle;
+  }
+
+  .grmc-zero-label {
+    font-size: 22px;
+    font-style: italic;
+    text-anchor: start;
+  }
+
+  .grmc-bracket-label {
+    font-size: 22px;
+    font-weight: bold;
+    text-anchor: middle;
+  }
+
+  .grmc-legend-text {
+    font-size: 22px;
+    text-anchor: start;
+  }
+
+  .grmc-legend-title {
+    font-size: 22px;
+    font-weight: bold;
+    text-anchor: start;
+  }
+
+  .grmc-group-mean-label {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .grmc-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .grmc-fade-in {
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .grmc-data-point-old {
+    transition: cx 2s ease-in-out;
+  }
+
+  .grmc-data-point-new {
+    transition: cx 2s ease-in-out;
+  }
+
+  .grmc-data-triangle-old {
+    transition: transform 2s ease-in-out;
+  }
+
+  .grmc-data-triangle-new {
+    transition: transform 2s ease-in-out;
+  }
+
+  .grmc-reg-line {
+    transition: d 2s ease-in-out;
+  }
+
+  #grmc-bracket-group {
+    transition: transform 2s ease-in-out;
+  }
+
+  #grmc-old-reg-line-group {
+    transition: transform 2s ease-in-out;
+  }
+
+  #grmc-new-reg-line-group {
+    transition: transform 2s ease-in-out;
+  }
+
+  .grmc-zero-line-group {
+    transition: opacity 0.5s ease-in-out;
+  }
+</style>
+<div id="grmc-wrapper">
+<div id="grmc-container">
+
+</div>
+</div>
+<div class="fragment" data-fragment-index="1">
+
+</div>
+<div class="fragment" data-fragment-index="2">
+
+</div>
+<div class="fragment" data-fragment-index="3">
+
+</div>
+<div class="fragment" data-fragment-index="4">
+
+</div>
+<div class="fragment" data-fragment-index="5">
+
+</div>
+<div class="fragment" data-fragment-index="6">
+
+</div>
+<div class="fragment" data-fragment-index="7">
+
+</div>
+<div class="fragment" data-fragment-index="8">
+
+</div>
+<div class="fragment" data-fragment-index="9">
+
+</div>
+<div class="fragment" data-fragment-index="10">
+
+</div>
+<div class="fragment" data-fragment-index="11">
+
+</div>
+<div class="fragment" data-fragment-index="12">
+
+</div>
+<script>
+(function() {
+  // ============================================
+  // DATA (exact values from R)
+  // ============================================
+  // Old Program (coral #F8766D, circles)
+  var oldEdu = [12, 14, 13, 16, 15, 14, 17, 14, 16, 15];
+  var oldPerf = [54.6, 67.5, 65.7, 64.4, 64.6, 63.7, 75.3, 66.0, 74.0, 69.8];
+
+  // New Program (teal #00BFC4, triangles)
+  var newEdu = [15, 18, 16, 20, 17, 16, 19, 15, 18, 16];
+  var newPerf = [67.8, 84.2, 78.0, 90.6, 70.7, 81.8, 88.4, 73.0, 88.1, 80.2];
+
+  // Group means for centering
+  var oldMeanEdu = 14.6;
+  var newMeanEdu = 17.0;
+
+  // Coefficient values from R:
+  // lm(performance ~ program + education) gives programnew = 5.33
+  // lm(performance ~ program + education_gc) gives programnew = 13.72
+  var programCoefUncentered = 5.33;
+  var programCoefCentered = 13.72;
+
+  // Regression parameters from R: lm(performance ~ program + education)
+  // Intercept = 15.5418, programnew = 5.3334, slope = 3.4944
+  var slope = 3.4944;
+  var interceptOld = 15.5418;
+  var interceptNew = interceptOld + programCoefUncentered;
+
+  // Colors
+  var coralColor = '#F8766D';
+  var tealColor = '#00BFC4';
+  var orangeAccent = '#ff7f00';
+
+  // ============================================
+  // SVG COORDINATE MAPPING (1920x1080)
+  // ============================================
+  var svgWidth = 1920;
+  var svgHeight = 1080;
+  var marginLeft = 150;
+  var marginRight = 200;
+  var marginTop = 100;
+  var marginBottom = 120;
+
+  var plotWidth = svgWidth - marginLeft - marginRight;
+  var plotHeight = svgHeight - marginTop - marginBottom;
+
+  // Data ranges
+  var xMin = -5;
+  var xMax = 20;
+  var yMin = 50;
+  var yMax = 90;
+
+  function xToSvg(val) {
+    return marginLeft + ((val - xMin) / (xMax - xMin)) * plotWidth;
+  }
+
+  function yToSvg(val) {
+    return marginTop + ((yMax - val) / (yMax - yMin)) * plotHeight;
+  }
+
+  // ============================================
+  // SVG ELEMENT CREATION HELPERS
+  // ============================================
+  var svgNS = "http://www.w3.org/2000/svg";
+  var svg = null;
+
+  function createLine(x1, y1, x2, y2, stroke, strokeWidth, id) {
+    var line = document.createElementNS(svgNS, 'line');
+    line.setAttribute('x1', x1);
+    line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2);
+    line.setAttribute('y2', y2);
+    line.setAttribute('stroke', stroke || '#333');
+    line.setAttribute('stroke-width', strokeWidth || 2);
+    if (id) line.setAttribute('id', id);
+    return line;
+  }
+
+  function createText(x, y, text, className, fill, id) {
+    var textEl = document.createElementNS(svgNS, 'text');
+    textEl.setAttribute('x', x);
+    textEl.setAttribute('y', y);
+    textEl.setAttribute('fill', fill || '#333');
+    if (className) textEl.setAttribute('class', className);
+    if (id) textEl.setAttribute('id', id);
+    textEl.textContent = text;
+    return textEl;
+  }
+
+  function createCircle(cx, cy, r, fill, className, id) {
+    var circle = document.createElementNS(svgNS, 'circle');
+    circle.setAttribute('cx', cx);
+    circle.setAttribute('cy', cy);
+    circle.setAttribute('r', r);
+    circle.setAttribute('fill', fill);
+    if (className) circle.setAttribute('class', className);
+    if (id) circle.setAttribute('id', id);
+    return circle;
+  }
+
+  function createPolygon(points, fill, className, id) {
+    var polygon = document.createElementNS(svgNS, 'polygon');
+    polygon.setAttribute('points', points);
+    polygon.setAttribute('fill', fill);
+    if (className) polygon.setAttribute('class', className);
+    if (id) polygon.setAttribute('id', id);
+    return polygon;
+  }
+
+  function createRect(x, y, width, height, fill, rx, id) {
+    var rect = document.createElementNS(svgNS, 'rect');
+    rect.setAttribute('x', x);
+    rect.setAttribute('y', y);
+    rect.setAttribute('width', width);
+    rect.setAttribute('height', height);
+    rect.setAttribute('fill', fill);
+    rect.setAttribute('rx', rx || 0);
+    if (id) rect.setAttribute('id', id);
+    return rect;
+  }
+
+  function createGroup(id, className) {
+    var g = document.createElementNS(svgNS, 'g');
+    if (id) g.setAttribute('id', id);
+    if (className) g.setAttribute('class', className);
+    return g;
+  }
+
+  function trianglePoints(cx, cy, size) {
+    size = size || 10;
+    var h = size * Math.sqrt(3) / 2;
+    return cx + ',' + (cy - h) + ' ' + (cx - size) + ',' + (cy + h) + ' ' + (cx + size) + ',' + (cy + h);
+  }
+
+  // ============================================
+  // BUILD SVG ELEMENTS
+  // ============================================
+  function buildSVG() {
+    var container = document.getElementById('grmc-container');
+    if (!container) {
+      console.error('GRMC animation container not found');
+      return false;
+    }
+
+    // Create SVG dynamically
+    svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', '0 0 1920 1080');
+    svg.setAttribute('id', 'grmc-svg');
+    container.appendChild(svg);
+
+    // Background rounded rectangle
+    var bgRect = createRect(40, 20, svgWidth - 80, svgHeight - 40, 'rgba(0, 0, 0, 0.75)', 20, 'grmc-bg-rect');
+    bgRect.setAttribute('class', 'grmc-hidden grmc-fade-in');
+    svg.appendChild(bgRect);
+
+    // Title
+    var title = createText(svgWidth / 2, 70, 'Group Mean Centering', 'grmc-title grmc-hidden grmc-fade-in', '#ffffff', 'grmc-main-title');
+    svg.appendChild(title);
+
+    // Axes group
+    var axisGroup = createGroup('grmc-axis-group', 'grmc-hidden grmc-fade-in');
+
+    // X-axis line
+    axisGroup.appendChild(createLine(xToSvg(xMin), yToSvg(yMin), xToSvg(xMax), yToSvg(yMin), '#ffffff', 2));
+
+    // Y-axis line
+    axisGroup.appendChild(createLine(xToSvg(xMin), yToSvg(yMin), xToSvg(xMin), yToSvg(yMax), '#ffffff', 2));
+
+    // X-axis ticks and labels
+    for (var val = -5; val <= 20; val += 5) {
+      var x = xToSvg(val);
+      axisGroup.appendChild(createLine(x, yToSvg(yMin), x, yToSvg(yMin) + 8, '#ffffff', 2));
+      var label = createText(x, yToSvg(yMin) + 30, val.toString(), 'grmc-tick-label', '#ffffff');
+      axisGroup.appendChild(label);
+    }
+
+    // Y-axis ticks and labels
+    for (var val = 50; val <= 90; val += 10) {
+      var y = yToSvg(val);
+      axisGroup.appendChild(createLine(xToSvg(xMin) - 8, y, xToSvg(xMin), y, '#ffffff', 2));
+      var label = createText(xToSvg(xMin) - 40, y + 6, val.toString(), 'grmc-tick-label', '#ffffff');
+      label.setAttribute('text-anchor', 'end');
+      axisGroup.appendChild(label);
+    }
+
+    // X-axis label
+    var xAxisLabel = createText(svgWidth / 2, yToSvg(yMin) + 80, 'Years of Education (Uncentered)', 'grmc-axis-label', '#ffffff', 'grmc-x-axis-label');
+    axisGroup.appendChild(xAxisLabel);
+
+    // Y-axis label (rotated)
+    var yAxisLabel = createText(0, 0, 'Performance Rating', 'grmc-axis-label-y', '#ffffff');
+    yAxisLabel.setAttribute('transform', 'translate(60, ' + (svgHeight / 2) + ') rotate(-90)');
+    axisGroup.appendChild(yAxisLabel);
+
+    svg.appendChild(axisGroup);
+
+    // Grid lines
+    var gridGroup = createGroup('grmc-grid-group', 'grmc-hidden grmc-fade-in');
+    for (var val = -5; val <= 20; val += 5) {
+      if (val !== xMin) {
+        var line = createLine(xToSvg(val), yToSvg(yMin), xToSvg(val), yToSvg(yMax), 'rgba(255,255,255,0.15)', 1);
+        gridGroup.appendChild(line);
+      }
+    }
+    for (var val = 60; val <= 90; val += 10) {
+      var line = createLine(xToSvg(xMin), yToSvg(val), xToSvg(xMax), yToSvg(val), 'rgba(255,255,255,0.15)', 1);
+      gridGroup.appendChild(line);
+    }
+    svg.appendChild(gridGroup);
+
+    // Old Program regression line group (separate for independent animation)
+    var oldRegLineGroup = createGroup('grmc-old-reg-line-group', 'grmc-hidden grmc-fade-in');
+
+    var oldLineX1 = 12, oldLineX2 = 17;
+    var oldLineY1 = interceptOld + slope * oldLineX1;
+    var oldLineY2 = interceptOld + slope * oldLineX2;
+
+    var oldRegLine = createLine(xToSvg(oldLineX1), yToSvg(oldLineY1), xToSvg(oldLineX2), yToSvg(oldLineY2), coralColor, 3, 'grmc-old-reg-line');
+    oldRegLine.setAttribute('class', 'grmc-reg-line');
+    oldRegLineGroup.appendChild(oldRegLine);
+    svg.appendChild(oldRegLineGroup);
+
+    // New Program regression line group (separate for independent animation)
+    var newRegLineGroup = createGroup('grmc-new-reg-line-group', 'grmc-hidden grmc-fade-in');
+
+    var newLineX1 = 15, newLineX2 = 20;
+    var newLineY1 = interceptNew + slope * newLineX1;
+    var newLineY2 = interceptNew + slope * newLineX2;
+
+    var newRegLine = createLine(xToSvg(newLineX1), yToSvg(newLineY1), xToSvg(newLineX2), yToSvg(newLineY2), tealColor, 3, 'grmc-new-reg-line');
+    newRegLine.setAttribute('class', 'grmc-reg-line');
+    newRegLineGroup.appendChild(newRegLine);
+    svg.appendChild(newRegLineGroup);
+
+    // Old Program points group
+    var oldPointsGroup = createGroup('grmc-old-points-group', 'grmc-hidden grmc-fade-in');
+
+    for (var i = 0; i < oldEdu.length; i++) {
+      var x = xToSvg(oldEdu[i]);
+      var y = yToSvg(oldPerf[i]);
+      var circle = createCircle(x, y, 10, coralColor, 'grmc-data-point-old', 'grmc-old-point-' + i);
+      oldPointsGroup.appendChild(circle);
+    }
+
+    svg.appendChild(oldPointsGroup);
+
+    // New Program points group
+    var newPointsGroup = createGroup('grmc-new-points-group', 'grmc-hidden grmc-fade-in');
+
+    for (var i = 0; i < newEdu.length; i++) {
+      var x = xToSvg(newEdu[i]);
+      var y = yToSvg(newPerf[i]);
+      var triangle = createPolygon(trianglePoints(x, y, 10), tealColor, 'grmc-data-triangle-new', 'grmc-new-point-' + i);
+      triangle.setAttribute('data-orig-x', x);
+      triangle.setAttribute('data-y', y);
+      newPointsGroup.appendChild(triangle);
+    }
+
+    svg.appendChild(newPointsGroup);
+
+    // Legend
+    var legendGroup = createGroup('grmc-legend-group', 'grmc-hidden grmc-fade-in');
+    var legendX = svgWidth - 280;
+    var legendY = 700;
+
+    legendGroup.appendChild(createText(legendX, legendY, 'program', 'grmc-legend-title', '#ffffff'));
+    legendGroup.appendChild(createCircle(legendX + 10, legendY + 35, 8, coralColor));
+    legendGroup.appendChild(createText(legendX + 30, legendY + 40, 'Old Program', 'grmc-legend-text', '#ffffff'));
+    legendGroup.appendChild(createPolygon(trianglePoints(legendX + 10, legendY + 65, 8), tealColor));
+    legendGroup.appendChild(createText(legendX + 30, legendY + 70, 'New Program', 'grmc-legend-text', '#ffffff'));
+
+    svg.appendChild(legendGroup);
+
+    // Starting label
+    var startLabel = createText(svgWidth / 2, 120, 'UNCENTERED: Intercept = performance when education = 0', 'grmc-annotation grmc-hidden grmc-fade-in', '#ffffff', 'grmc-start-label');
+    startLabel.setAttribute('font-size', '28px');
+    svg.appendChild(startLabel);
+
+    // Orange zero line group (initial)
+    var grayZeroGroup = createGroup('grmc-gray-zero-group', 'grmc-hidden grmc-fade-in');
+    var zeroX = xToSvg(0);
+    var zeroLine = createLine(zeroX, yToSvg(yMax), zeroX, yToSvg(yMin), orangeAccent, 3);
+    zeroLine.setAttribute('stroke-dasharray', '8,4');
+    grayZeroGroup.appendChild(zeroLine);
+
+    var zeroLabel = createText(zeroX + 8, yToSvg(90), 'Zero', 'grmc-zero-label', orangeAccent);
+    grayZeroGroup.appendChild(zeroLabel);
+    var zeroLabel2 = createText(zeroX + 8, yToSvg(90) + 20, '(unrealistic)', 'grmc-zero-label', orangeAccent);
+    grayZeroGroup.appendChild(zeroLabel2);
+
+    svg.appendChild(grayZeroGroup);
+
+    // Bracket annotation group
+    var bracketGroup = createGroup('grmc-bracket-group', 'grmc-hidden grmc-fade-in');
+
+    var bracketX = 16;
+    var bracketSvgX = xToSvg(bracketX);
+    var capLength = 12;
+    // Position vertical line so horizontal caps END at the regression lines (bracketSvgX)
+    var vertLineX = bracketSvgX - capLength;
+    var yOldLine = interceptOld + slope * bracketX;
+    var yNewLine = interceptNew + slope * bracketX;
+
+    var bracketTopY = yToSvg(yNewLine);
+    var bracketBottomY = yToSvg(yOldLine);
+
+    var bracketColor = '#ffff00';
+    var bracketWidth = 4;
+
+    bracketGroup.appendChild(createLine(vertLineX, bracketTopY, vertLineX, bracketBottomY, bracketColor, bracketWidth, 'grmc-bracket-vertical'));
+
+    bracketGroup.appendChild(createLine(vertLineX, bracketTopY, bracketSvgX, bracketTopY, bracketColor, bracketWidth, 'grmc-bracket-cap-top'));
+    bracketGroup.appendChild(createLine(vertLineX, bracketBottomY, bracketSvgX, bracketBottomY, bracketColor, bracketWidth, 'grmc-bracket-cap-bottom'));
+
+    var labelBgWidth = 85;
+    var labelBgHeight = 42;
+    var labelBgX = bracketSvgX + 8;
+    var labelBgY = (bracketTopY + bracketBottomY) / 2 - labelBgHeight / 2;
+
+    var labelBg = createRect(labelBgX, labelBgY, labelBgWidth, labelBgHeight, 'rgba(0, 0, 0, 0.9)', 6, 'grmc-bracket-label-bg');
+    labelBg.setAttribute('stroke', bracketColor);
+    labelBg.setAttribute('stroke-width', '3');
+    bracketGroup.appendChild(labelBg);
+
+    var bracketLabel = createText(labelBgX + labelBgWidth / 2, labelBgY + 30, '5.33', 'grmc-bracket-label', bracketColor, 'grmc-bracket-label-text');
+    bracketLabel.setAttribute('text-anchor', 'middle');
+    bracketLabel.setAttribute('font-size', '28px');
+    bracketLabel.setAttribute('font-weight', 'bold');
+    bracketGroup.appendChild(bracketLabel);
+
+    bracketGroup.setAttribute('data-base-x', bracketSvgX);
+
+    svg.appendChild(bracketGroup);
+
+    // Centering annotation
+    var centerAnnotation = createText(svgWidth / 2, 170, "We will subtract each group's own mean from its education values", 'grmc-annotation grmc-hidden grmc-fade-in', '#ffff00', 'grmc-center-annotation');
+    svg.appendChild(centerAnnotation);
+
+    // Group means annotation
+    var groupMeansGroup = createGroup('grmc-group-means-group', 'grmc-hidden grmc-fade-in');
+
+    var oldMeanX = xToSvg(oldMeanEdu);
+    var oldMeanLine = createLine(oldMeanX, yToSvg(yMin) - 5, oldMeanX, yToSvg(yMin) - 35, coralColor, 3);
+    groupMeansGroup.appendChild(oldMeanLine);
+    var oldMeanLabel = createText(oldMeanX, yToSvg(yMin) - 45, 'Old: ' + oldMeanEdu, 'grmc-group-mean-label', coralColor);
+    oldMeanLabel.setAttribute('text-anchor', 'middle');
+    groupMeansGroup.appendChild(oldMeanLabel);
+
+    var newMeanX = xToSvg(newMeanEdu);
+    var newMeanLine = createLine(newMeanX, yToSvg(yMin) - 5, newMeanX, yToSvg(yMin) - 35, tealColor, 3);
+    groupMeansGroup.appendChild(newMeanLine);
+    var newMeanLabel = createText(newMeanX, yToSvg(yMin) - 45, 'New: ' + newMeanEdu, 'grmc-group-mean-label', tealColor);
+    newMeanLabel.setAttribute('text-anchor', 'middle');
+    groupMeansGroup.appendChild(newMeanLabel);
+
+    svg.appendChild(groupMeansGroup);
+
+    // Orange zero line group (final)
+    var orangeZeroGroup = createGroup('grmc-orange-zero-group', 'grmc-hidden grmc-fade-in');
+    var orangeZeroX = xToSvg(0);
+    var orangeZeroLine = createLine(orangeZeroX, yToSvg(yMax), orangeZeroX, yToSvg(yMin), orangeAccent, 3);
+    orangeZeroLine.setAttribute('stroke-dasharray', '8,4');
+    orangeZeroGroup.appendChild(orangeZeroLine);
+
+    var orangeZeroLabel = createText(orangeZeroX + 8, yToSvg(90), "Zero = Each Group's Mean", 'grmc-zero-label', orangeAccent);
+    orangeZeroGroup.appendChild(orangeZeroLabel);
+
+    svg.appendChild(orangeZeroGroup);
+
+    // Centered X-axis label
+    var centeredXLabel = createText(svgWidth / 2, yToSvg(yMin) + 80, 'Education (Group Mean Centered)', 'grmc-axis-label grmc-hidden grmc-fade-in', orangeAccent, 'grmc-centered-x-label');
+    svg.appendChild(centeredXLabel);
+
+    // Highlight text
+    var highlightText = createText(svgWidth / 2, yToSvg(55), "Zero now represents each group's average education level", 'grmc-annotation grmc-hidden grmc-fade-in', orangeAccent, 'grmc-highlight-text');
+    svg.appendChild(highlightText);
+
+    console.log('GRMC animation SVG built successfully');
+    return true;
+  }
+
+  // ============================================
+  // SHOW/HIDE HELPERS
+  // ============================================
+  function showEl(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('grmc-hidden');
+  }
+
+  function hideEl(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('grmc-hidden');
+  }
+
+  // ============================================
+  // ANIMATION HELPERS
+  // ============================================
+  function animateOldProgramShift() {
+    var shiftAmount = oldMeanEdu;
+    var shiftPixels = (shiftAmount / (xMax - xMin)) * plotWidth;
+
+    // Animate Old Program circles
+    for (var i = 0; i < oldEdu.length; i++) {
+      var point = document.getElementById('grmc-old-point-' + i);
+      var newX = xToSvg(oldEdu[i] - shiftAmount);
+      point.setAttribute('cx', newX);
+    }
+
+    // Animate Old Program regression line using CSS transform on the group
+    var oldRegLineGroup = document.getElementById('grmc-old-reg-line-group');
+    oldRegLineGroup.style.transform = 'translateX(-' + shiftPixels + 'px)';
+  }
+
+  function animateNewProgramShift() {
+    var shiftAmount = newMeanEdu;
+    var shiftPixels = (shiftAmount / (xMax - xMin)) * plotWidth;
+
+    // Animate New Program triangles using CSS transform
+    for (var i = 0; i < newEdu.length; i++) {
+      var triangle = document.getElementById('grmc-new-point-' + i);
+      triangle.style.transform = 'translateX(-' + shiftPixels + 'px)';
+    }
+
+    // Animate New Program regression line using CSS transform on the group
+    var newRegLineGroup = document.getElementById('grmc-new-reg-line-group');
+    newRegLineGroup.style.transform = 'translateX(-' + shiftPixels + 'px)';
+  }
+
+  function animateBracketToZero() {
+    var yOldAtZero = interceptOld + slope * oldMeanEdu;
+    var yNewAtZero = interceptNew + slope * newMeanEdu;
+
+    var zeroSvgX = xToSvg(0);
+    var capLength = 12;
+    // Position vertical line so that horizontal caps END at x=0
+    var vertLineX = zeroSvgX - capLength;
+    var bracketTopY = yToSvg(yNewAtZero);
+    var bracketBottomY = yToSvg(yOldAtZero);
+
+    // Update vertical line
+    var vertLine = document.getElementById('grmc-bracket-vertical');
+    vertLine.setAttribute('x1', vertLineX);
+    vertLine.setAttribute('x2', vertLineX);
+    vertLine.setAttribute('y1', bracketTopY);
+    vertLine.setAttribute('y2', bracketBottomY);
+
+    // Update caps (extend right from vertical line to x=0)
+    var capTop = document.getElementById('grmc-bracket-cap-top');
+    capTop.setAttribute('x1', vertLineX);
+    capTop.setAttribute('x2', zeroSvgX);
+    capTop.setAttribute('y1', bracketTopY);
+    capTop.setAttribute('y2', bracketTopY);
+
+    var capBottom = document.getElementById('grmc-bracket-cap-bottom');
+    capBottom.setAttribute('x1', vertLineX);
+    capBottom.setAttribute('x2', zeroSvgX);
+    capBottom.setAttribute('y1', bracketBottomY);
+    capBottom.setAttribute('y2', bracketBottomY);
+
+    // Update label background position
+    var labelBgWidth = 85;
+    var labelBgHeight = 42;
+    var labelBgX = zeroSvgX + 8;
+    var labelBgY = (bracketTopY + bracketBottomY) / 2 - labelBgHeight / 2;
+
+    var labelBg = document.getElementById('grmc-bracket-label-bg');
+    labelBg.setAttribute('x', labelBgX);
+    labelBg.setAttribute('y', labelBgY);
+
+    // Update label text position and value
+    var labelText = document.getElementById('grmc-bracket-label-text');
+    labelText.setAttribute('x', labelBgX + labelBgWidth / 2);
+    labelText.setAttribute('y', labelBgY + 30);
+    labelText.textContent = '13.72';
+  }
+
+  // ============================================
+  // RESET ANIMATION
+  // ============================================
+  function resetAnimation() {
+    console.log('GRMC: Resetting animation to initial state');
+
+    // Hide all animated elements
+    hideEl('grmc-bg-rect');
+    hideEl('grmc-main-title');
+    hideEl('grmc-axis-group');
+    hideEl('grmc-grid-group');
+    hideEl('grmc-old-points-group');
+    hideEl('grmc-new-points-group');
+    hideEl('grmc-old-reg-line-group');
+    hideEl('grmc-new-reg-line-group');
+    hideEl('grmc-legend-group');
+    hideEl('grmc-start-label');
+    hideEl('grmc-gray-zero-group');
+    hideEl('grmc-bracket-group');
+    hideEl('grmc-center-annotation');
+    hideEl('grmc-group-means-group');
+    hideEl('grmc-orange-zero-group');
+    hideEl('grmc-centered-x-label');
+    hideEl('grmc-highlight-text');
+
+    // Reset title text and color
+    var title = document.getElementById('grmc-main-title');
+    if (title) {
+      title.textContent = 'Group Mean Centering';
+      title.setAttribute('fill', '#ffffff');
+    }
+
+    // Reset x-axis label visibility
+    var xAxisLabel = document.getElementById('grmc-x-axis-label');
+    if (xAxisLabel) {
+      xAxisLabel.style.opacity = '1';
+    }
+
+    // Reset Old Program point positions
+    for (var i = 0; i < oldEdu.length; i++) {
+      var point = document.getElementById('grmc-old-point-' + i);
+      if (point) {
+        point.setAttribute('cx', xToSvg(oldEdu[i]));
+      }
+    }
+
+    // Reset New Program triangle transforms
+    for (var i = 0; i < newEdu.length; i++) {
+      var triangle = document.getElementById('grmc-new-point-' + i);
+      if (triangle) {
+        triangle.style.transform = '';
+      }
+    }
+
+    // Reset Old regression line transform
+    var oldRegLineGroup = document.getElementById('grmc-old-reg-line-group');
+    if (oldRegLineGroup) {
+      oldRegLineGroup.style.transform = '';
+    }
+
+    // Reset New regression line transform
+    var newRegLineGroup = document.getElementById('grmc-new-reg-line-group');
+    if (newRegLineGroup) {
+      newRegLineGroup.style.transform = '';
+    }
+
+    // Reset bracket position and value
+    var bracketX = 16;
+    var bracketSvgX = xToSvg(bracketX);
+    var capLength = 12;
+    // Position vertical line so horizontal caps END at the regression lines (bracketSvgX)
+    var vertLineX = bracketSvgX - capLength;
+    var yOldLine = interceptOld + slope * bracketX;
+    var yNewLine = interceptNew + slope * bracketX;
+    var bracketTopY = yToSvg(yNewLine);
+    var bracketBottomY = yToSvg(yOldLine);
+
+    var vertLine = document.getElementById('grmc-bracket-vertical');
+    if (vertLine) {
+      vertLine.setAttribute('x1', vertLineX);
+      vertLine.setAttribute('x2', vertLineX);
+      vertLine.setAttribute('y1', bracketTopY);
+      vertLine.setAttribute('y2', bracketBottomY);
+    }
+
+    var capTop = document.getElementById('grmc-bracket-cap-top');
+    if (capTop) {
+      capTop.setAttribute('x1', vertLineX);
+      capTop.setAttribute('x2', bracketSvgX);
+      capTop.setAttribute('y1', bracketTopY);
+      capTop.setAttribute('y2', bracketTopY);
+    }
+
+    var capBottom = document.getElementById('grmc-bracket-cap-bottom');
+    if (capBottom) {
+      capBottom.setAttribute('x1', vertLineX);
+      capBottom.setAttribute('x2', bracketSvgX);
+      capBottom.setAttribute('y1', bracketBottomY);
+      capBottom.setAttribute('y2', bracketBottomY);
+    }
+
+    var labelBgWidth = 85;
+    var labelBgHeight = 42;
+    var labelBgX = bracketSvgX + 8;
+    var labelBgY = (bracketTopY + bracketBottomY) / 2 - labelBgHeight / 2;
+
+    var labelBg = document.getElementById('grmc-bracket-label-bg');
+    if (labelBg) {
+      labelBg.setAttribute('x', labelBgX);
+      labelBg.setAttribute('y', labelBgY);
+    }
+
+    var labelText = document.getElementById('grmc-bracket-label-text');
+    if (labelText) {
+      labelText.setAttribute('x', labelBgX + labelBgWidth / 2);
+      labelText.setAttribute('y', labelBgY + 30);
+      labelText.textContent = '5.33';
+    }
+  }
+
+  // ============================================
+  // RENDER FRAME
+  // ============================================
+  function renderFrame(frame) {
+    console.log('GRMC: Rendering frame:', frame);
+
+    switch (frame) {
+      case 1: // Title + background
+        showEl('grmc-bg-rect');
+        showEl('grmc-main-title');
+        break;
+
+      case 2: // Scatterplot (axes, points, lines, legend)
+        showEl('grmc-axis-group');
+        showEl('grmc-grid-group');
+        showEl('grmc-old-points-group');
+        showEl('grmc-new-points-group');
+        showEl('grmc-old-reg-line-group');
+        showEl('grmc-new-reg-line-group');
+        showEl('grmc-legend-group');
+        break;
+
+      case 3: // Starting label + zero line
+        showEl('grmc-start-label');
+        showEl('grmc-gray-zero-group');
+        break;
+
+      case 4: // Show bracket at x=16
+        showEl('grmc-bracket-group');
+        break;
+
+      case 5: // Centering annotation
+        showEl('grmc-center-annotation');
+        break;
+
+      case 6: // Show group means
+        showEl('grmc-group-means-group');
+        break;
+
+      case 7: // ANIMATE - shift Old Program left by 14.6
+        animateOldProgramShift();
+        break;
+
+      case 8: // Pause for comprehension
+        // Just a pause - no new elements
+        break;
+
+      case 9: // ANIMATE - shift New Program left by 17.0
+        hideEl('grmc-center-annotation');
+        hideEl('grmc-group-means-group');
+        animateNewProgramShift();
+        break;
+
+      case 10: // Update bracket - move to x=0, change value to 13.72
+        animateBracketToZero();
+        break;
+
+      case 11: // Final state - orange title, updated labels
+        hideEl('grmc-start-label');
+        hideEl('grmc-gray-zero-group');
+        var xAxisLabel = document.getElementById('grmc-x-axis-label');
+        if (xAxisLabel) xAxisLabel.style.opacity = '0';
+
+        showEl('grmc-orange-zero-group');
+        showEl('grmc-centered-x-label');
+
+        var title = document.getElementById('grmc-main-title');
+        if (title) {
+          title.textContent = "GROUP MEAN CENTERED: Intercept = performance at each group's mean education";
+          title.setAttribute('fill', orangeAccent);
+        }
+
+        showEl('grmc-highlight-text');
+        break;
+
+      case 12: // Fade out
+        hideEl('grmc-bg-rect');
+        hideEl('grmc-main-title');
+        hideEl('grmc-axis-group');
+        hideEl('grmc-grid-group');
+        hideEl('grmc-old-points-group');
+        hideEl('grmc-new-points-group');
+        hideEl('grmc-old-reg-line-group');
+        hideEl('grmc-new-reg-line-group');
+        hideEl('grmc-legend-group');
+        hideEl('grmc-bracket-group');
+        hideEl('grmc-orange-zero-group');
+        hideEl('grmc-centered-x-label');
+        hideEl('grmc-highlight-text');
+        break;
+    }
+  }
+
+  // ============================================
+  // INITIALIZATION
+  // ============================================
+  function init() {
+    console.log('GRMC: Initializing animation...');
+
+    if (!buildSVG()) {
+      console.error('GRMC: Failed to build SVG');
+      return;
+    }
+
+    if (typeof Reveal !== 'undefined') {
+      console.log('GRMC: Reveal.js detected, attaching fragment listener');
+
+      Reveal.on('fragmentshown', function(event) {
+        var currentSlide = Reveal.getCurrentSlide();
+        var slideId = currentSlide ? currentSlide.getAttribute('id') : null;
+        if (slideId !== 'group-mean-centered-scatter-animation') {
+          return;
+        }
+        var idx = event.fragment.getAttribute('data-fragment-index');
+        console.log('GRMC: Fragment shown, index:', idx);
+        if (idx) renderFrame(parseInt(idx));
+      });
+
+      Reveal.on('slidechanged', function(event) {
+        var slideId = event.currentSlide.getAttribute('id');
+        if (slideId === 'group-mean-centered-scatter-animation') {
+          console.log('GRMC: Entering animation slide, resetting...');
+          resetAnimation();
+        }
+      });
+    } else {
+      console.warn('GRMC: Reveal.js not found');
+    }
+  }
+
+  // Initialize when Reveal is ready
+  if (typeof Reveal !== 'undefined' && Reveal.isReady && Reveal.isReady()) {
+    init();
+  } else if (typeof Reveal !== 'undefined') {
+    Reveal.on('ready', init);
+  } else {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        if (typeof Reveal !== 'undefined') {
+          if (Reveal.isReady && Reveal.isReady()) {
+            init();
+          } else {
+            Reveal.on('ready', init);
+          }
+        }
+      }, 100);
+    });
+  }
+})();
+</script>
 </section>
 <section id="comparing-the-two-centered-models" class="slide level2 smaller" data-transition="none">
 <h2>Comparing the Two Centered Models</h2>
@@ -4201,7 +5863,8 @@ education |           0.66 | [0.47, 1.00]
 </section>
 <section id="training-methods-a-dramatic-example" class="slide level2 content-light">
 <h2>Training Methods: A Dramatic Example</h2>
-<p>A company compares two training methods on skill test scores.</p>
+<p>A company wants to determine which of two training methods produces better employee skills. They randomly assigned 10 employees to either Method A or Method B, then measured skill test scores.</p>
+<p><strong>The initial finding:</strong></p>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -4220,7 +5883,7 @@ education |           0.66 | [0.47, 1.00]
 </tr>
 </tbody>
 </table>
-<p><strong>The CEO is ready to switch everyone to Method B.</strong></p>
+<p><strong>The CEO is ready to switch all 2,000 new hires to Method B.</strong></p>
 <div class="fragment">
 <p>But wait… Method B participants also had <strong>6 more years of experience</strong> on average.</p>
 <p><strong>Is Method B actually better? Or are we just seeing an experience effect?</strong></p>
@@ -4573,12 +6236,92 @@ education |           0.66 | [0.47, 1.00]
 <p>💬 <strong>In the chat:</strong> Will the Method B coefficient go UP, DOWN, or STAY THE SAME when we add experience? And roughly by how much?</p>
 <p>Take 30 seconds to commit to a prediction. I’ll ask a few people to share their reasoning.</p>
 </section>
-<section id="adjusted-analysis" class="slide level2">
+<section id="adjusted-analysis" class="slide level2 size-85">
 <h2>Adjusted Analysis</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a>lm_adjusted <span class="ot">&lt;-</span> <span class="fu">lm</span>(test_score <span class="sc">~</span> method <span class="sc">+</span> experience, <span class="at">data =</span> training_data)</span>
 <span id="cb32-2"><a href=""></a><span class="fu">tidy</span>(lm_adjusted)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">45.2</td>
+<td style="text-align: right;">1.341641</td>
+<td style="text-align: right;">33.6900909</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">methodB</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">1.989975</td>
+<td style="text-align: right;">0.1005038</td>
+<td style="text-align: right;">0.9227624</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">experience</td>
+<td style="text-align: right;">4.3</td>
+<td style="text-align: right;">0.300000</td>
+<td style="text-align: right;">14.3333333</td>
+<td style="text-align: right;">0.0000019</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The <strong>intercept</strong> (45.2) represents the predicted test score for employees trained with <strong>Method A</strong> (the reference group) who have zero years of experience.</p>
+<p>The coefficient for <strong>experience</strong> (4.3) indicates that each additional year of <strong>experience</strong> was associated with a 4.3-point increase in test score, <em>holding method constant</em>. That is, for two people trained with the same method, a one-year difference in experience corresponds to a 4.3-point difference in predicted test score.</p>
+<p>The coefficient for <strong>methodB</strong> (0.2) indicates that employees trained with <strong>Method B</strong> scored 0.2 points higher than those trained with Method A, <em>holding experience constant</em>. That is, for two people with the same experience level, the difference in predicted test score across the two methods is 0.2.</p>
+<div class="fragment">
+<p><strong>Notably, the adjusted method effect (0.2) is dramatically different from the unadjusted effect (26)—the apparent advantage of Method B was entirely due to experience differences between groups!</strong></p>
+</div>
+</section>
+<section id="comparing-unadjusted-and-adjusted-models-1" class="slide level2">
+<h2>Comparing Unadjusted and Adjusted Models</h2>
+<p><strong>Unadjusted</strong> (method only)</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">62.4</td>
+<td style="text-align: right;">3.091925</td>
+<td style="text-align: right;">20.181602</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">methodB</td>
+<td style="text-align: right;">26.0</td>
+<td style="text-align: right;">4.372642</td>
+<td style="text-align: right;">5.946062</td>
+<td style="text-align: right;">0.0003435</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>Adjusted</strong> (method + experience)</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -4842,8 +6585,8 @@ education |           0.66 | [0.47, 1.00]
 <h2>Plot Adjusted Training Model (3D)</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-90b09e96b95b62e29d90" style="width:768px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-90b09e96b95b62e29d90">{"x":{"visdat":{"2eeb587c57cc":["function () ","plotlyVisDat"],"2eeb4b683f76":["function () ","data"],"2eeb291e82a7":["function () ","data"],"2eeb1213b708":["function () ","data"],"2eeb4c55777d":["function () ","data"]},"cur_data":"2eeb4c55777d","attrs":{"2eeb4b683f76":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","marker":{"size":6,"color":"#F8766D"},"name":"A","inherit":true},"2eeb291e82a7":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"lines","line":{"width":4,"color":"#F8766D"},"showlegend":false,"inherit":true},"2eeb1213b708":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","marker":{"size":6,"color":"#00BFC4","symbol":"diamond"},"name":"B","inherit":true},"2eeb4c55777d":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"lines","line":{"width":4,"color":"#00BFC4"},"showlegend":false,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"Experience"},"yaxis":{"title":"Method","tickvals":[0,1],"ticktext":["A","B"]},"zaxis":{"title":"Test Score"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[2,3,4,5,6],"y":[0,0,0,0,0],"z":[54,56,62,68,72],"type":"scatter3d","mode":"markers","marker":{"color":"#F8766D","size":6,"line":{"color":"rgba(31,119,180,1)"}},"name":"A","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null},{"x":[2,3,4,5,6],"y":[0,0,0,0,0],"z":[53.800000000000026,58.100000000000023,62.40000000000002,66.700000000000017,71.000000000000014],"type":"scatter3d","mode":"lines","line":{"color":"#F8766D","width":4},"showlegend":false,"marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[8,9,10,11,12],"y":[1,1,1,1,1],"z":[80,86,88,92,96],"type":"scatter3d","mode":"markers","marker":{"color":"#00BFC4","size":6,"symbol":"diamond","line":{"color":"rgba(44,160,44,1)"}},"name":"B","error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"line":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[8,9,10,11,12],"y":[1,1,1,1,1],"z":[79.800000000000011,84.100000000000009,88.400000000000006,92.700000000000003,97],"type":"scatter3d","mode":"lines","line":{"color":"#00BFC4","width":4},"showlegend":false,"marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-41b43ca9feaed7314374" style="width:768px;height:576px;"></div>
+<script type="application/json" data-for="htmlwidget-41b43ca9feaed7314374">{"x":{"visdat":{"12f964fe29e52":["function () ","plotlyVisDat"],"12f9627084277":["function () ","data"],"12f96f43a6a6":["function () ","data"],"12f962271e41e":["function () ","data"],"12f9663377f3c":["function () ","data"]},"cur_data":"12f9663377f3c","attrs":{"12f9627084277":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","marker":{"size":6,"color":"#F8766D"},"name":"A","inherit":true},"12f96f43a6a6":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"lines","line":{"width":4,"color":"#F8766D"},"showlegend":false,"inherit":true},"12f962271e41e":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","marker":{"size":6,"color":"#00BFC4","symbol":"diamond"},"name":"B","inherit":true},"12f9663377f3c":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"lines","line":{"width":4,"color":"#00BFC4"},"showlegend":false,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"Experience"},"yaxis":{"title":"Method","tickvals":[0,1],"ticktext":["A","B"]},"zaxis":{"title":"Test Score"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[2,3,4,5,6],"y":[0,0,0,0,0],"z":[54,56,62,68,72],"type":"scatter3d","mode":"markers","marker":{"color":"#F8766D","size":6,"line":{"color":"rgba(31,119,180,1)"}},"name":"A","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null},{"x":[2,3,4,5,6],"y":[0,0,0,0,0],"z":[53.800000000000026,58.100000000000023,62.40000000000002,66.700000000000017,71.000000000000014],"type":"scatter3d","mode":"lines","line":{"color":"#F8766D","width":4},"showlegend":false,"marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[8,9,10,11,12],"y":[1,1,1,1,1],"z":[80,86,88,92,96],"type":"scatter3d","mode":"markers","marker":{"color":"#00BFC4","size":6,"symbol":"diamond","line":{"color":"rgba(44,160,44,1)"}},"name":"B","error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"line":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[8,9,10,11,12],"y":[1,1,1,1,1],"z":[79.800000000000011,84.100000000000009,88.400000000000006,92.700000000000003,97],"type":"scatter3d","mode":"lines","line":{"color":"#00BFC4","width":4},"showlegend":false,"marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>The two parallel lines from the 2D plot are now shown in 3D space. Notice how the lines overlap vertically—there’s essentially no gap between methods when experience is accounted for.</p>
@@ -4955,8 +6698,8 @@ education |           0.66 | [0.47, 1.00]
 <p>👀 <strong>Take a moment:</strong> Look at those two numbers. A “highly significant” result (p &lt; .001) became completely non-significant (p = .92).</p>
 <p>This is why understanding confounding matters for your research.</p>
 </section>
-<section id="additional-statistics-training-models" class="slide level2">
-<h2>Additional Statistics: Training Models</h2>
+<section id="additional-statistics-training-models-1" class="slide level2">
+<h2>Additional Statistics: Training Models 1</h2>
 <p><strong>R² from glance() for both models:</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">glance</span>(lm_unadjusted)  <span class="co"># Unadjusted model</span></span>
@@ -4991,9 +6734,9 @@ education |           0.66 | [0.47, 1.00]
 </div>
 </div>
 </section>
-<section id="additional-statistics-training-models-1b" class="slide level2 smaller">
-<h2>Additional Statistics: Training Models 1b</h2>
-<p><strong>95% Confidence Intervals for R² using MBESS:</strong></p>
+<section id="additional-statistics-training-models-2" class="slide level2">
+<h2>Additional Statistics: Training Models 2</h2>
+<p><strong>95% Confidence Intervals for R² using MBESS: Unadjusted</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="fu">library</span>(MBESS)</span>
 <span id="cb36-2"><a href=""></a></span>
@@ -5017,6 +6760,10 @@ $Prob.Greater.Upper
 [1] 0.025</code></pre>
 </div>
 </div>
+</section>
+<section id="additional-statistics-training-models-3" class="slide level2">
+<h2>Additional Statistics: Training Models 3</h2>
+<p><strong>95% Confidence Intervals for R² using MBESS: Adjusted</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a><span class="co"># For adjusted model: 2 predictors (method + experience)</span></span>
 <span id="cb38-2"><a href=""></a><span class="fu">ci.R2</span>(<span class="at">R2 =</span> <span class="fu">glance</span>(lm_adjusted)<span class="sc">$</span>r.squared,</span>
@@ -5039,8 +6786,8 @@ $Prob.Greater.Upper
 </div>
 </div>
 </section>
-<section id="additional-statistics-training-models-2" class="slide level2">
-<h2>Additional Statistics: Training Models 2</h2>
+<section id="additional-statistics-training-models-4" class="slide level2">
+<h2>Additional Statistics: Training Models 4</h2>
 <p><strong>Cohen’s d for unadjusted comparison:</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="fu">library</span>(effsize)</span>
@@ -5056,8 +6803,8 @@ d estimate: -3.76062 (large)
 </div>
 </div>
 </section>
-<section id="additional-statistics-training-models-3" class="slide level2">
-<h2>Additional Statistics: Training Models 3</h2>
+<section id="additional-statistics-training-models-5" class="slide level2">
+<h2>Additional Statistics: Training Models 5</h2>
 <p><strong>Partial Eta Squared for both models:</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">library</span>(effectsize)</span>
@@ -5086,8 +6833,8 @@ experience |           0.97 | [0.92, 1.00]
 </div>
 </div>
 </section>
-<section id="additional-statistics-training-models-4" class="slide level2 smaller">
-<h2>Additional Statistics: Training Models 4</h2>
+<section id="additional-statistics-training-models-6" class="slide level2 smaller">
+<h2>Additional Statistics: Training Models 6</h2>
 <p><strong>Descriptive Statistics by Method:</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a>training_data <span class="sc">%&gt;%</span></span>
@@ -5129,8 +6876,8 @@ experience |           0.97 | [0.92, 1.00]
 </div>
 </div>
 </section>
-<section id="results-paragraph-training-methods" class="slide level2 results-paragraph">
-<h2>Results Paragraph: Training Methods</h2>
+<section id="results-paragraph-training-methods-1" class="slide level2 results-paragraph">
+<h2>Results Paragraph: Training Methods 1</h2>
 <p>We examined whether Training Method B improved test scores compared to Method A (<em>N</em> = 10; Method A <em>n</em> = 5, Method B <em>n</em> = 5). We conducted two analyses: an unadjusted analysis comparing methods directly, and an adjusted analysis accounting for employees’ years of experience.</p>
 </section>
 <section id="results-paragraph-training-methods-2" class="slide level2 results-paragraph">
@@ -5156,6 +6903,9 @@ experience |           0.97 | [0.92, 1.00]
 <p><strong>Comparing Unadjusted and Adjusted Analyses</strong></p>
 <p>The unadjusted and adjusted analyses tell strikingly different stories. In the unadjusted analysis, the method coefficient was <em>b</em> = 26, 95% CI [15.92, 36.08], suggesting Method B was associated with dramatically higher test scores. After adjusting for experience, the coefficient dropped to <em>b</em> = 0.2, 95% CI [-4.51, 4.91]—a change of 25.8 points.</p>
 <p>This change occurred because Method B employees had substantially more experience (10 vs.&nbsp;4 years). The unadjusted comparison confounded the method effect with the experience effect. When we statistically held experience constant, the estimated method effect was essentially zero, <span class="math inline">\(\eta^2_p\)</span> = 0.99, 90% CI [0.9, 0.98].</p>
+</section>
+<section id="results-paragraph-training-methods-6" class="slide level2 results-paragraph">
+<h2>Results Paragraph: Training Methods 6</h2>
 <p><strong>Conclusion.</strong> After controlling for experience, Method B showed no detectable advantage over Method A. The apparent superiority of Method B in the unadjusted analysis appears to be explained by experience differences between groups rather than the training method itself. However, because employees were not randomly assigned to training methods, we cannot rule out other unmeasured factors that may differ between groups.</p>
 </section>
 <section id="polling-question-6-confounding" class="slide level2 content-light">
@@ -5218,10 +6968,9 @@ experience |           0.97 | [0.92, 1.00]
 </ul>
 <p><em>In this example, Method B employees had 12 years of experience <strong>before</strong> they ever started the training. Therefore, it is a confounder.</em></p>
 </section>
-<section id="breakout-challenge-spot-the-confound" class="slide level2">
-<h2>Breakout Challenge: Spot the Confound</h2>
+<section id="challenge-spot-the-confound" class="slide level2">
+<h2>Challenge: Spot the Confound</h2>
 <p><strong>Scenario:</strong> A study finds that coffee drinkers have higher rates of heart disease than non-coffee drinkers. The researchers conclude coffee causes heart disease.</p>
-<p><strong>In your breakout room:</strong></p>
 <ol type="1">
 <li><p>What’s a potential confounding variable? (Hint: What else might differ between coffee drinkers and non-drinkers?)</p></li>
 <li><p>Draw a simple diagram like the one we just saw:</p>
@@ -5233,7 +6982,6 @@ experience |           0.97 | [0.92, 1.00]
 </ul></li>
 <li><p>If we “held constant” your confound, what might happen to the coffee → heart disease relationship?</p></li>
 </ol>
-<p><strong>When you return:</strong> Each room shares their confound in one sentence.</p>
 </section>
 <section id="the-hidden-threat-unmeasured-confounds" class="slide level2">
 <h2>The Hidden Threat: Unmeasured Confounds</h2>
@@ -5520,7 +7268,6 @@ experience |           0.97 | [0.92, 1.00]
 </section>
 <section id="part-8-a-clinical-example" class="slide level2 section-header" data-background="linear-gradient(135deg, #5E1A99 0%, #7231B2 50%, #814FBC 100%)">
 <h2>Part 8: A Clinical Example</h2>
-<p>Nothing new here - just 3 groups instead of 2 groups. Read on your own if we run out of time in the lecture.</p>
 </section>
 <section id="section-4" class="slide level2" data-background-image="images/ai-image-therapy-triptych.webp" data-background-size="cover">
 <h2></h2>
@@ -5851,8 +7598,8 @@ experience |           0.97 | [0.92, 1.00]
 <h2>Visualizing the Adjusted Model (3D)</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-ba86e3add6abfb5f0253" style="width:768px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-ba86e3add6abfb5f0253">{"x":{"visdat":{"2eeb5177c1b7":["function () ","plotlyVisDat"],"2eebd4eff2a":["function () ","data"],"2eeb3d522539":["function () ","data"],"2eeb5c09e0a2":["function () ","data"],"2eebc7adae3":["function () ","data"],"2eeb55b8737b":["function () ","data"],"2eeb40a5bc34":["function () ","data"]},"cur_data":"2eeb40a5bc34","attrs":{"2eebd4eff2a":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","marker":{"size":6,"color":"#2ca02c"},"name":"In-person","inherit":true},"2eeb3d522539":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"lines","line":{"width":4,"color":"#2ca02c"},"showlegend":false,"inherit":true},"2eeb5c09e0a2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","marker":{"size":6,"color":"#1f77b4","symbol":"diamond"},"name":"Telehealth","inherit":true},"2eebc7adae3":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"lines","line":{"width":4,"color":"#1f77b4"},"showlegend":false,"inherit":true},"2eeb55b8737b":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","marker":{"size":6,"color":"#d62728","symbol":"square"},"name":"App","inherit":true},"2eeb40a5bc34":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"lines","line":{"width":4,"color":"#d62728"},"showlegend":false,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"Duration (years)"},"yaxis":{"title":"Format","tickvals":[0,1,2],"ticktext":["In-person","Telehealth","App"]},"zaxis":{"title":"GAD-7 Score"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[0.5,3.3999999999999999,3.5,4.2999999999999998,4.5,4.5999999999999996,5.4000000000000004,5.7000000000000002,6.2000000000000002,8,8,8.0999999999999996,8.1999999999999993,8.1999999999999993,8.1999999999999993,8.1999999999999993,9.1999999999999993,9.3000000000000007,9.5,9.5999999999999996,9.6999999999999993,9.6999999999999993,9.8000000000000007,10.199999999999999,10.6,11,11.1,11.300000000000001,11.4,11.699999999999999],"y":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"z":[1,5,3,11,5,2,7,10,7,10,9,10,7,6,13,11,10,12,8,12,9,11,7,11,13,8,9,8,12,7],"type":"scatter3d","mode":"markers","marker":{"color":"#2ca02c","size":6,"line":{"color":"rgba(31,119,180,1)"}},"name":"In-person","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null},{"x":[0.5,3.3999999999999999,3.5,4.2999999999999998,4.5,4.5999999999999996,5.4000000000000004,5.7000000000000002,6.2000000000000002,8,8,8.0999999999999996,8.1999999999999993,8.1999999999999993,8.1999999999999993,8.1999999999999993,9.1999999999999993,9.3000000000000007,9.5,9.5999999999999996,9.6999999999999993,9.6999999999999993,9.8000000000000007,10.199999999999999,10.6,11,11.1,11.300000000000001,11.4,11.699999999999999],"y":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"z":[3.5987999521669121,5.4886009524412485,5.5537665041748463,6.075090918043629,6.2054220215108247,6.2705875732444216,6.7919119871132052,6.9874086423139978,7.3132364009819879,8.4862163321867481,8.4862163321867481,8.5513818839203459,8.616547435653942,8.616547435653942,8.616547435653942,8.616547435653942,9.2682029529899204,9.33336850472352,9.4636996081907157,9.5288651599243117,9.5940307116579113,9.5940307116579113,9.6591962633915092,9.9198584703258987,10.18052067726029,10.441182884194681,10.506348435928281,10.636679539395477,10.701845091129073,10.897341746329868],"type":"scatter3d","mode":"lines","line":{"color":"#2ca02c","width":4},"showlegend":false,"marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[2.3999999999999999,2.3999999999999999,2.7999999999999998,3.2000000000000002,3.3999999999999999,3.6000000000000001,3.7999999999999998,3.7999999999999998,4,4,4.0999999999999996,4.0999999999999996,4.0999999999999996,4.4000000000000004,4.5999999999999996,4.9000000000000004,5,5.2000000000000002,5.5999999999999996,5.5999999999999996,5.7000000000000002,5.7999999999999998,5.9000000000000004,6.2000000000000002,6.2000000000000002,6.5999999999999996,6.7999999999999998,7.2000000000000002,8.5,8.5999999999999996],"y":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"z":[4,6,6,6,5,8,6,7,6,10,6,8,8,8,6,5,11,8,9,8,9,10,8,9,8,8,9,3,11,10],"type":"scatter3d","mode":"markers","marker":{"color":"#1f77b4","size":6,"symbol":"diamond","line":{"color":"rgba(44,160,44,1)"}},"name":"Telehealth","error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"line":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[2.3999999999999999,2.3999999999999999,2.7999999999999998,3.2000000000000002,3.3999999999999999,3.6000000000000001,3.7999999999999998,3.7999999999999998,4,4,4.0999999999999996,4.0999999999999996,4.0999999999999996,4.4000000000000004,4.5999999999999996,4.9000000000000004,5,5.2000000000000002,5.5999999999999996,5.5999999999999996,5.7000000000000002,5.7999999999999998,5.9000000000000004,6.2000000000000002,6.2000000000000002,6.5999999999999996,6.7999999999999998,7.2000000000000002,8.5,8.5999999999999996],"y":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"z":[5.8716117641265901,5.8716117641265901,6.1322739710609806,6.3929361779953728,6.5232672814625676,6.6535983849297633,6.783929488396959,6.783929488396959,6.9142605918641546,6.9142605918641546,6.9794261435977525,6.9794261435977525,6.9794261435977525,7.174922798798546,7.3052539022657417,7.5007505574665361,7.565916109200133,7.6962472126673287,7.95690941960172,7.95690941960172,8.0220749713353179,8.0872405230689157,8.1524060748025136,8.3479027300033071,8.3479027300033071,8.6085649369376984,8.7388960404048941,8.9995582473392854,9.8467104198760573,9.9118759716096534],"type":"scatter3d","mode":"lines","line":{"color":"#1f77b4","width":4},"showlegend":false,"marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null},{"x":[0.5,0.5,0.5,1,1.1000000000000001,1.3,2.1000000000000001,2.2000000000000002,2.2000000000000002,2.2999999999999998,2.2999999999999998,2.5,2.6000000000000001,2.7000000000000002,2.7000000000000002,2.7000000000000002,2.8999999999999999,3.1000000000000001,3.1000000000000001,3.2999999999999998,3.3999999999999999,3.5,3.5,3.5,3.7000000000000002,3.7999999999999998,3.8999999999999999,4.2000000000000002,4.4000000000000004,4.5],"y":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"z":[10,8,5,6,4,5,11,10,10,4,9,11,8,7,10,4,9,11,8,9,4,7,10,6,10,8,7,6,9,12],"type":"scatter3d","mode":"markers","marker":{"color":"#d62728","size":6,"symbol":"square","line":{"color":"rgba(148,103,189,1)"}},"name":"App","error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"line":{"color":"rgba(148,103,189,1)"},"frame":null},{"x":[0.5,0.5,0.5,1,1.1000000000000001,1.3,2.1000000000000001,2.2000000000000002,2.2000000000000002,2.2999999999999998,2.2999999999999998,2.5,2.6000000000000001,2.7000000000000002,2.7000000000000002,2.7000000000000002,2.8999999999999999,3.1000000000000001,3.1000000000000001,3.2999999999999998,3.3999999999999999,3.5,3.5,3.5,3.7000000000000002,3.7999999999999998,3.8999999999999999,4.2000000000000002,4.4000000000000004,4.5],"y":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"z":[6.5214130457720483,6.5214130457720483,6.5214130457720483,6.8472408044400375,6.9124063561736353,7.042737459640831,7.5640618735096137,7.6292274252432115,7.6292274252432115,7.6943929769768085,7.6943929769768085,7.824724080444005,7.8898896321776029,7.9550551839112007,7.9550551839112007,7.9550551839112007,8.0853862873783964,8.215717390845592,8.215717390845592,8.3460484943127859,8.4112140460463856,8.4763795977799816,8.4763795977799816,8.4763795977799816,8.6067107012471773,8.6718762529807769,8.737041804714373,8.9325384599151683,9.0628695633823639,9.12803511511596],"type":"scatter3d","mode":"lines","line":{"color":"#d62728","width":4},"showlegend":false,"marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-869b6d1a791eb6a6fe9c" style="width:768px;height:576px;"></div>
+<script type="application/json" data-for="htmlwidget-869b6d1a791eb6a6fe9c">{"x":{"visdat":{"12f962f2b8fb6":["function () ","plotlyVisDat"],"12f9654e80deb":["function () ","data"],"12f964ee9ead9":["function () ","data"],"12f965f397508":["function () ","data"],"12f963532910f":["function () ","data"],"12f96ad18b12":["function () ","data"],"12f964301504a":["function () ","data"]},"cur_data":"12f964301504a","attrs":{"12f9654e80deb":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","marker":{"size":6,"color":"#2ca02c"},"name":"In-person","inherit":true},"12f964ee9ead9":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"lines","line":{"width":4,"color":"#2ca02c"},"showlegend":false,"inherit":true},"12f965f397508":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","marker":{"size":6,"color":"#1f77b4","symbol":"diamond"},"name":"Telehealth","inherit":true},"12f963532910f":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"lines","line":{"width":4,"color":"#1f77b4"},"showlegend":false,"inherit":true},"12f96ad18b12":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","marker":{"size":6,"color":"#d62728","symbol":"square"},"name":"App","inherit":true},"12f964301504a":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"lines","line":{"width":4,"color":"#d62728"},"showlegend":false,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"Duration (years)"},"yaxis":{"title":"Format","tickvals":[0,1,2],"ticktext":["In-person","Telehealth","App"]},"zaxis":{"title":"GAD-7 Score"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[0.5,3.3999999999999999,3.5,4.2999999999999998,4.5,4.5999999999999996,5.4000000000000004,5.7000000000000002,6.2000000000000002,8,8,8.0999999999999996,8.1999999999999993,8.1999999999999993,8.1999999999999993,8.1999999999999993,9.1999999999999993,9.3000000000000007,9.5,9.5999999999999996,9.6999999999999993,9.6999999999999993,9.8000000000000007,10.199999999999999,10.6,11,11.1,11.300000000000001,11.4,11.699999999999999],"y":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"z":[1,5,3,11,5,2,7,10,7,10,9,10,7,6,13,11,10,12,8,12,9,11,7,11,13,8,9,8,12,7],"type":"scatter3d","mode":"markers","marker":{"color":"#2ca02c","size":6,"line":{"color":"rgba(31,119,180,1)"}},"name":"In-person","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null},{"x":[0.5,3.3999999999999999,3.5,4.2999999999999998,4.5,4.5999999999999996,5.4000000000000004,5.7000000000000002,6.2000000000000002,8,8,8.0999999999999996,8.1999999999999993,8.1999999999999993,8.1999999999999993,8.1999999999999993,9.1999999999999993,9.3000000000000007,9.5,9.5999999999999996,9.6999999999999993,9.6999999999999993,9.8000000000000007,10.199999999999999,10.6,11,11.1,11.300000000000001,11.4,11.699999999999999],"y":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"z":[3.5987999521669121,5.4886009524412485,5.5537665041748463,6.075090918043629,6.2054220215108247,6.2705875732444216,6.7919119871132052,6.9874086423139978,7.3132364009819879,8.4862163321867481,8.4862163321867481,8.5513818839203459,8.616547435653942,8.616547435653942,8.616547435653942,8.616547435653942,9.2682029529899204,9.33336850472352,9.4636996081907157,9.5288651599243117,9.5940307116579113,9.5940307116579113,9.6591962633915092,9.9198584703258987,10.18052067726029,10.441182884194681,10.506348435928281,10.636679539395477,10.701845091129073,10.897341746329868],"type":"scatter3d","mode":"lines","line":{"color":"#2ca02c","width":4},"showlegend":false,"marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[2.3999999999999999,2.3999999999999999,2.7999999999999998,3.2000000000000002,3.3999999999999999,3.6000000000000001,3.7999999999999998,3.7999999999999998,4,4,4.0999999999999996,4.0999999999999996,4.0999999999999996,4.4000000000000004,4.5999999999999996,4.9000000000000004,5,5.2000000000000002,5.5999999999999996,5.5999999999999996,5.7000000000000002,5.7999999999999998,5.9000000000000004,6.2000000000000002,6.2000000000000002,6.5999999999999996,6.7999999999999998,7.2000000000000002,8.5,8.5999999999999996],"y":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"z":[4,6,6,6,5,8,6,7,6,10,6,8,8,8,6,5,11,8,9,8,9,10,8,9,8,8,9,3,11,10],"type":"scatter3d","mode":"markers","marker":{"color":"#1f77b4","size":6,"symbol":"diamond","line":{"color":"rgba(44,160,44,1)"}},"name":"Telehealth","error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"line":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[2.3999999999999999,2.3999999999999999,2.7999999999999998,3.2000000000000002,3.3999999999999999,3.6000000000000001,3.7999999999999998,3.7999999999999998,4,4,4.0999999999999996,4.0999999999999996,4.0999999999999996,4.4000000000000004,4.5999999999999996,4.9000000000000004,5,5.2000000000000002,5.5999999999999996,5.5999999999999996,5.7000000000000002,5.7999999999999998,5.9000000000000004,6.2000000000000002,6.2000000000000002,6.5999999999999996,6.7999999999999998,7.2000000000000002,8.5,8.5999999999999996],"y":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"z":[5.8716117641265901,5.8716117641265901,6.1322739710609806,6.3929361779953728,6.5232672814625676,6.6535983849297633,6.783929488396959,6.783929488396959,6.9142605918641546,6.9142605918641546,6.9794261435977525,6.9794261435977525,6.9794261435977525,7.174922798798546,7.3052539022657417,7.5007505574665361,7.565916109200133,7.6962472126673287,7.95690941960172,7.95690941960172,8.0220749713353179,8.0872405230689157,8.1524060748025136,8.3479027300033071,8.3479027300033071,8.6085649369376984,8.7388960404048941,8.9995582473392854,9.8467104198760573,9.9118759716096534],"type":"scatter3d","mode":"lines","line":{"color":"#1f77b4","width":4},"showlegend":false,"marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null},{"x":[0.5,0.5,0.5,1,1.1000000000000001,1.3,2.1000000000000001,2.2000000000000002,2.2000000000000002,2.2999999999999998,2.2999999999999998,2.5,2.6000000000000001,2.7000000000000002,2.7000000000000002,2.7000000000000002,2.8999999999999999,3.1000000000000001,3.1000000000000001,3.2999999999999998,3.3999999999999999,3.5,3.5,3.5,3.7000000000000002,3.7999999999999998,3.8999999999999999,4.2000000000000002,4.4000000000000004,4.5],"y":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"z":[10,8,5,6,4,5,11,10,10,4,9,11,8,7,10,4,9,11,8,9,4,7,10,6,10,8,7,6,9,12],"type":"scatter3d","mode":"markers","marker":{"color":"#d62728","size":6,"symbol":"square","line":{"color":"rgba(148,103,189,1)"}},"name":"App","error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"line":{"color":"rgba(148,103,189,1)"},"frame":null},{"x":[0.5,0.5,0.5,1,1.1000000000000001,1.3,2.1000000000000001,2.2000000000000002,2.2000000000000002,2.2999999999999998,2.2999999999999998,2.5,2.6000000000000001,2.7000000000000002,2.7000000000000002,2.7000000000000002,2.8999999999999999,3.1000000000000001,3.1000000000000001,3.2999999999999998,3.3999999999999999,3.5,3.5,3.5,3.7000000000000002,3.7999999999999998,3.8999999999999999,4.2000000000000002,4.4000000000000004,4.5],"y":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"z":[6.5214130457720483,6.5214130457720483,6.5214130457720483,6.8472408044400375,6.9124063561736353,7.042737459640831,7.5640618735096137,7.6292274252432115,7.6292274252432115,7.6943929769768085,7.6943929769768085,7.824724080444005,7.8898896321776029,7.9550551839112007,7.9550551839112007,7.9550551839112007,8.0853862873783964,8.215717390845592,8.215717390845592,8.3460484943127859,8.4112140460463856,8.4763795977799816,8.4763795977799816,8.4763795977799816,8.6067107012471773,8.6718762529807769,8.737041804714373,8.9325384599151683,9.0628695633823639,9.12803511511596],"type":"scatter3d","mode":"lines","line":{"color":"#d62728","width":4},"showlegend":false,"marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>The three parallel lines show the adjusted effect: at any illness duration, in-person therapy (green) produces the lowest anxiety scores.</p>
@@ -6236,25 +7983,6 @@ duration  |           0.26 | [0.16, 1.00]
 </tbody>
 </table>
 </section>
-<section id="whats-next" class="slide level2">
-<h2>What’s Next</h2>
-<p><strong>Activity 1: Treatment Coding Practice</strong></p>
-<ul>
-<li>Deep practice with treatment coding (2 and 4 groups)</li>
-<li>Extensive “thinking horizontally” tables</li>
-</ul>
-<p><strong>Activity 2: Mixed Predictors</strong></p>
-<ul>
-<li>Combine categorical and continuous predictors</li>
-<li>Work through confounding examples</li>
-</ul>
-<p><strong>Assignment: Results Section</strong></p>
-<ul>
-<li>Analyze a CBT vs.&nbsp;Standard Care study</li>
-<li>Compare unadjusted and adjusted analyses</li>
-<li>Write a 500-word results section</li>
-</ul>
-</section>
 <section id="assumptions-note" class="slide level2">
 <h2>Assumptions Note</h2>
 <p>What we assumed today:</p>
@@ -6274,22 +8002,6 @@ duration  |           0.26 | [0.16, 1.00]
 </blockquote>
 <p><strong>Now you can answer:</strong> “Not so fast—what else differs between the groups?”</p>
 <p>That question—and the tools to answer it—is what you learned today.</p>
-</section>
-<section id="references" class="slide level2">
-<h2>References</h2>
-<p>Bickel, P. J., Hammel, E. A., &amp; O’Connell, J. W. (1975). Sex bias in graduate admissions: Data from Berkeley. <em>Science</em>, <em>187</em>(4175), 398–404. https://doi.org/10.1126/science.187.4175.398</p>
-</section>
-<section id="supplementary-materials-available" class="slide level2 content-light">
-<h2>Supplementary Materials Available</h2>
-<p>Additional slides on confounding examples, caveats, and randomization simulations are available in:</p>
-<p><strong><code>reg-cat-2-supplements.qmd</code></strong></p>
-<p>Topics covered:</p>
-<ul>
-<li>Real-world confounding examples</li>
-<li>When NOT to adjust (colliders, mediators)</li>
-<li>Monte Carlo simulations verifying randomization balance claims</li>
-<li>Multiple covariate balance probabilities</li>
-</ul>
 
 </section>
     </div>
