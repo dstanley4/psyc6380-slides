@@ -1,2 +1,5 @@
 # Master files contain multiplex secret - keep local only
 *-master.html
+
+# macOS
+.DS_Store
